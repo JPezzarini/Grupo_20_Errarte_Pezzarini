@@ -1,0 +1,2 @@
+from pacientes import Paciente
+
