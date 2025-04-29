@@ -18,7 +18,7 @@ class Sistema():
 
 
 
-    def recibir_paciente(self, paciente: Donante or Receptor):
+    def recibir_paciente(self, paciente: Paciente):
         if type(paciente) is Donante:
             self.recibir_donante(paciente)
         else:
