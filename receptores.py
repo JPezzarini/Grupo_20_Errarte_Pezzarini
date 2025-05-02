@@ -21,7 +21,8 @@ class Receptor(Paciente):
             return self.prioridad
 
         else:
-            edad =(date.today() - self._fecha_nac)
+            fecha_nacimiento_date = self._fecha_nac.date()  ##Convierto la fecha datetime a date
+            edad = (date.today() - fecha_nacimiento_date)
             edad = edad.days // 365
             if (edad < 18):
                 self.prioridad = 8
@@ -33,3 +34,5 @@ class Receptor(Paciente):
                 self.prioridad = 2
         return self.prioridad
             
+    def _nada(self):
+        return
