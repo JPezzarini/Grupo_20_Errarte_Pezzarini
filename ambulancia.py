@@ -3,7 +3,7 @@ from vehiculo import Vehiculo
 class Ambulancia(Vehiculo):
 
     def __init__(self, velocidad):
-        super().__init__(velocidad, registro_viajes, estado)
+        super().__init__(velocidad)
 
 
     def realizar_transporte(self):
