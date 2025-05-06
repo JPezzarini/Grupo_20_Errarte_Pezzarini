@@ -1,11 +1,12 @@
 from pacientes import Paciente
 from datetime import *
 from organo import Organo
+from centro_de_salud import Centro_Salud
 
 class Receptor(Paciente):
 
 
-    def __init__(self, nombre: str, DNI: int, fecha_nac: datetime, sexo: str, tel: str, t_sangre: str, centro_salud, organo_r : Organo, dt_espera: datetime, patologia: str, estado: str ):
+    def __init__(self, nombre: str, DNI: int, fecha_nac: datetime, sexo: str, tel: str, t_sangre: str, centro_salud: Centro_Salud, organo_r : Organo, dt_espera: datetime, patologia: str, estado: str ):
         super().__init__(nombre, DNI, fecha_nac, sexo, tel, t_sangre, centro_salud)
         self.organo_r = organo_r
         self.dt_espera = dt_espera

@@ -5,6 +5,7 @@ from datetime import *
 from donantes import Donante
 from receptores import Receptor
 from vehiculo import Vehiculo
+import random
 if TYPE_CHECKING:
     from pacientes import Paciente
     from organo import Organo
@@ -38,36 +39,36 @@ class Sistema():
     
 
     def elegir_receptor(self, receptores: list):
-        """La lista de receptores tiene todos los receptores compatibles que necesiten el órgano especificado
-            Esta lista fue hecha en la funcion buscar_match
-        """
+        #La lista de receptores tiene todos los receptores compatibles que necesiten el órgano especificado
+        #Esta lista fue hecha en la funcion buscar_match
+        
         for i in range(len(receptores)):
             for k in range (0,len(receptores)-1-i):
                 if(receptores[k+1].prioridad > receptores[k].prioridad):
                     a = receptores[k]
                     receptores[k] = receptores[k+1]
                     receptores[k+1] = a
-        self.elegir_receptor_prioridad(receptores)
+        receptor_match = self.elegir_receptor_prioridad(receptores)
+        return receptor_match # retorna el receptor de mayor prioridad
 
 
     def elegir_receptor_prioridad(self, receptores: list):
-        """
-        bubble sort
-        """
         for i in range(len(receptores)):
             for k in range (0,len(receptores)-1-i):
                 if(receptores[k+1].dt_espera > receptores[k].dt_espera and receptores[k+1].prioridad == receptores[k].prioridad):
                     a = receptores[k]
                     receptores[k] = receptores[k+1]
                     receptores[k+1] = a
+        return receptores[0]
 
 
 
-    def buscar_match(self,donante: Donante,organo: Organo):
+    def buscar_match(self,donante: Donante,organo: Organo): # el organo es el primero de la lista del donante
         receptores = []
         for i in range(len(self.lista_receptores)):
             if(self.lista_receptores[i].organo_r._tipo == organo._tipo and self.lista_receptores[i]._t_sangre == donante._t_sangre):
                 receptores.append(self.lista_receptores[i])
-        self.elegir_receptor(receptores)
-        
+        receptor_match = self.elegir_receptor(receptores)
+        donante.lista_organos[0].dt_hablacion = time(random.randint(0,23),random.randint(0,59),random.randint(0,59)) # creo un tiempo de ablacion random
+        donante.centro_salud.asignar_vehiculo(receptor_match.centro_salud)
 

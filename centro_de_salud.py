@@ -18,7 +18,7 @@ class Centro_Salud:
 
 
     def asignar_vehiculo(self, centro_receptor):
-        ordenar_vehiculo_velocidad()
+        self.ordenar_vehiculo_velocidad()
         if (self.provincia == centro_receptor.provincia and self.partido == centro_receptor.partido):
             for i in range (len(self.lista_vehiculos)):
                 if isinstance(self.lista_vehiculos[i], Ambulancia):

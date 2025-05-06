@@ -6,5 +6,5 @@ class Ambulancia(Vehiculo):
         super().__init__(velocidad)
 
 
-    def realizar_transporte(self):
+    def realizar_transporte(self,distancia: int, nivel_trafico: int):
         pass
