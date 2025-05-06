@@ -9,11 +9,8 @@ class Vehiculo(ABC):
         self.estado = True #True = Desocupado False = Ocupado
 
     @abstractmethod
-    def realizar_transporte(self,distancia: int, nivel_trafico: int, tiempo_hablacion_donante : time):
+    def realizar_transporte(self,distancia: int, nivel_trafico: int, fecha_hablacion_donante : datetime):
         tiempo = (self.velocidad/distancia) + nivel_trafico #se toma el tiempo como horas
-        dt = datetime.combine(datetime.today(), tiempo_hablacion_donante)
-        nueva_dt = dt + timedelta(hours = tiempo) #agrego el tiempo de transporte al de la hablacion del donante
-        tiempo_final = nueva_dt.time()
-
+        tiempo_final = fecha_hablacion_donante + timedelta(hour = tiempo) #sumo del tiempo de transporte a la fecha de hablacion del organo
         return tiempo_final
     
