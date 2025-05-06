@@ -71,5 +71,7 @@ class Sistema():
         receptor_match = self.elegir_receptor(receptores)
         hoy = date.today()
         donante.lista_organos[0].dt_hablacion = datetime.combine(hoy,time(random.randint(0,23),random.randint(0,59),random.randint(0,59))) # creo una fecha y tiempo de ablacion random
-        donante.centro_salud.asignar_vehiculo(receptor_match.centro_salud)
+        viaje = f"{donante.centro_salud.nombre}-{receptor_match.centro_salud.nombre}" #me guardo el viaje para pasarselo al vehiculo
+        donante.centro_salud.asignar_vehiculo(receptor_match.centro_salud,viaje)
+       
 

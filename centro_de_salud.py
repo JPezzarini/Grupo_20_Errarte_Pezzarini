@@ -17,25 +17,25 @@ class Centro_Salud:
 
 
 
-    def asignar_vehiculo(self, centro_receptor):
+    def asignar_vehiculo(self, centro_receptor, viaje): #falta determinar nivel de trafico y distancia de viaje
         self.ordenar_vehiculo_velocidad()
         if (self.provincia == centro_receptor.provincia and self.partido == centro_receptor.partido):
             for i in range (len(self.lista_vehiculos)):
                 if isinstance(self.lista_vehiculos[i], Ambulancia):
                     if (self.lista_vehiculos[i].estado):
-                        self.lista_vehiculos[i].realizar_transporte()
+                        self.lista_vehiculos[i].realizar_transporte(distancia, nivel_trafico, fecha_hablacion_donante, viaje)
                         return
         if (self.provincia == centro_receptor.provincia and self.partido != centro_receptor.partido):
             for i in range (len(self.lista_vehiculos)):
                 if isinstance(self.lista_vehiculos[i], Helicoptero):
                     if (self.lista_vehiculos[i].estado):
-                        self.lista_vehiculos[i].realizar_transporte()
+                        self.lista_vehiculos[i].realizar_transporte(distancia, nivel_trafico, fecha_hablacion_donante, viaje)
                         return
         if (self.provincia != centro_receptor.provincia):
             for i in range (len(self.lista_vehiculos)):
                 if isinstance(self.lista_vehiculos[i], Avion):
                     if (self.lista_vehiculos[i].estado):
-                        self.lista_vehiculos[i].realizar_transporte()
+                        self.lista_vehiculos[i].realizar_transporte(distancia, nivel_trafico, fecha_hablacion_donante, viaje)
                         return
         
         print("No se pudo asignar un vehículo adecuado en este momento") #Printea solo si no encontro un vehiculo 
