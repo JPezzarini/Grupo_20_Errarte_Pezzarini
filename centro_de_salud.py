@@ -17,7 +17,7 @@ class Centro_Salud:
 
 
 
-    def asignar_vehiculo(self, centro_receptor, viaje): #falta determinar nivel de trafico y distancia de viaje
+    def asignar_vehiculo(self, centro_receptor, viaje, fecha_hablacion_donante): #falta determinar nivel de trafico y distancia de viaje
         self.ordenar_vehiculo_velocidad()
         if (self.provincia == centro_receptor.provincia and self.partido == centro_receptor.partido):
             for i in range (len(self.lista_vehiculos)):

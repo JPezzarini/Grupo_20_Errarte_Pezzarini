@@ -68,10 +68,14 @@ class Sistema():
         for i in range(len(self.lista_receptores)):
             if(self.lista_receptores[i].organo_r._tipo == organo._tipo and self.lista_receptores[i]._t_sangre == donante._t_sangre):
                 receptores.append(self.lista_receptores[i])
+        if(len(receptores) == 0):
+            print("no se encontraron receptores que cualifiquen") #printea si no encuentra match
+            return
         receptor_match = self.elegir_receptor(receptores)
         hoy = date.today()
         donante.lista_organos[0].dt_hablacion = datetime.combine(hoy,time(random.randint(0,23),random.randint(0,59),random.randint(0,59))) # creo una fecha y tiempo de ablacion random
+        fecha_hablacion = donante.lista_organos[0].dt_hablacion #guardo la fecha en una variable para pasarla entre funciones
         viaje = f"{donante.centro_salud.nombre}-{receptor_match.centro_salud.nombre}" #me guardo el viaje para pasarselo al vehiculo
-        donante.centro_salud.asignar_vehiculo(receptor_match.centro_salud,viaje)
+        donante.centro_salud.asignar_vehiculo(receptor_match.centro_salud,viaje,fecha_hablacion)
        
 
