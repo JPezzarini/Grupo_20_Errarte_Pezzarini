@@ -16,7 +16,7 @@ class Receptor(Paciente):
         
 
     def calcular_prioridad(self):
-        "La prioridad es un numero del 1 al 10. Esta funcion la calcula"
+        #La prioridad es un numero del 1 al 10. Esta funcion la calcula
         if self.estado == "Inestable":
             self.prioridad = 10
             return self.prioridad
@@ -35,5 +35,5 @@ class Receptor(Paciente):
                 self.prioridad = 2
         return self.prioridad
             
-    def _nada(self):
+    def __nada(self):
         return

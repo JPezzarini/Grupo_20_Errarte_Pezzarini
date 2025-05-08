@@ -11,5 +11,5 @@ class Donante(Paciente):
         self.lista_organos = lista_organos
         
 
-    def _nada(self):
+    def __nada(self):
         return
