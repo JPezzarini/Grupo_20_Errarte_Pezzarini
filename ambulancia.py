@@ -11,4 +11,6 @@ class Ambulancia(Vehiculo):
         tiempo = (self.velocidad/distancia) + nivel_trafico #se toma el tiempo como horas
         tiempo_final = fecha_hablacion_donante + timedelta(hour = tiempo) #sumo el tiempo de transporte a la fecha de hablacion del organo
         self.registro_viajes.append(viaje)
+        while datetime.today() < tiempo_final:
+            self.estado = False
         return tiempo_final

@@ -35,5 +35,6 @@ class Receptor(Paciente):
                 self.prioridad = 2
         return self.prioridad
             
-    def __nada(self):
-        return
+    def _nada(self):
+        nada = 0
+        return nada

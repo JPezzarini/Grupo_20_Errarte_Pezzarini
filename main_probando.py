@@ -8,15 +8,20 @@ from vehiculo import Vehiculo
 from ambulancia import Ambulancia
 from avion import Avion
 from helicoptero import Helicoptero
-
+from cirujano import Cirujano
 
 
 vehiculos1 = [Avion(90), Helicoptero(100), Ambulancia(110), Ambulancia(85), Ambulancia(95)]
 vehiculos2 = [Avion(80), Avion(120), Helicoptero(100), Ambulancia(105), Ambulancia(90)]
 
+#Cirujanos
+gomez = Cirujano("gastroenterologo")
+fischer = Cirujano("cardiovascular")
+fernandez = Cirujano("pulmonar")
+lopez = Cirujano("plastico")
 # Centros de Salud
-cs1 = Centro_Salud("Hospital Central", "La Plata", "Buenos Aires", "+54 911 1234-5678", ["Dr. Gómez", "Dra. Ruiz"], vehiculos1)
-cs2 = Centro_Salud("Clínica del Sur", "Avellaneda", "Buenos Aires", "+54 911 8765-4321", ["Dr. Fernández", "Dr. Paredes"], vehiculos2)
+cs1 = Centro_Salud("Hospital Central", "La Plata", "Buenos Aires", "+54 911 1234-5678", [gomez, fischer], vehiculos1)
+cs2 = Centro_Salud("Clínica del Sur", "Avellaneda", "Buenos Aires", "+54 911 8765-4321", [fernandez, lopez], vehiculos2)
 
 # Donantes (10 por centro)
 donantes = [
@@ -47,3 +52,8 @@ receptores = [
 ]
 
 INCUAI = Sistema(receptores,donantes,[cs1,cs2])
+
+organo1 = Organo("intestino")
+organo2 = Organo("páncreas")
+
+print(gomez.chequear_especialidad(organo1))

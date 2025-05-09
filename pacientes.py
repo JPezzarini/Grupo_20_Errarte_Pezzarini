@@ -19,7 +19,7 @@ class Paciente(ABC):
         self.centro_salud = None
     
     @abstractmethod
-    def __nada(self):
+    def _nada(self):
         pass
     
 
