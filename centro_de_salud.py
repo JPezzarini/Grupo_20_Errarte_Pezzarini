@@ -1,12 +1,10 @@
-from vehiculo import Vehiculo
 from avion import Avion
 from helicoptero import Helicoptero
 from ambulancia import Ambulancia
 from random import *
-from organo import Organo
-from receptores import Receptor
-from donantes import Donante
-from sistema import Sistema
+from organo import *
+from cirujano import Cirujano
+
 
 class Centro_Salud:
 
@@ -59,7 +57,7 @@ class Centro_Salud:
                     self.lista_vehiculos[k] = self.lista_vehiculos[k+1]
                     self.lista_vehiculos[k+1] = a
     
-    def realizar_transplante(cirujano, receptor, organo):
+    def realizar_transplante(self, cirujano: Cirujano, receptor, organo: Organo): #Si importo Receptor da un error de circular import
         if (cirujano == organo):
             probabilidad  = randint(1, 10)
             if (probabilidad >=3 ):

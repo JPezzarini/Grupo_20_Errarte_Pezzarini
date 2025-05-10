@@ -8,15 +8,17 @@ class Tipo(Enum):
     córnea = 4
     hueso = 5
     intestino = 6
-    riñon = 7
+    riñón = 7
     hígado = 8
     páncreas = 9
 
 class Organo():
 
 
-    def __init__(self, tipo: Tipo):
-        self._tipo = tipo
+    def __init__(self, tipo):
+        if isinstance(tipo, int):
+            self._tipo = Tipo(tipo) #Convierto int a enum
+        elif isinstance(tipo, Tipo):
+            self._tipo = tipo #Asigno directamente el enum
         self.dt_hablacion = None
-
 
