@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 class Sistema():
 
 
-    def __init__(self, centros_salud,lista_receptores,lista_donantes):
+    def __init__(self, centros_salud: list, lista_receptores: list, lista_donantes: list):
         self.lista_receptores = lista_receptores
         self.lista_donantes = lista_donantes
         self.lista_centros = centros_salud
@@ -32,13 +32,13 @@ class Sistema():
             self.recibir_receptor(paciente)
 
 
-    def recibir_donante(self, donante):
+    def recibir_donante(self, donante: Donante):
         self.lista_donantes.append(donante)
         for i in range(len(donante.lista_organos)):
             k = i
             self.buscar_match_donante(donante,donante.lista_organos[i],k)
 
-    def recibir_receptor(self, receptor):
+    def recibir_receptor(self, receptor: Receptor):
         self.lista_receptores.append(receptor)
         self.buscar_match_receptor(receptor)
     
@@ -88,7 +88,7 @@ class Sistema():
             donante.lista_organos.remove(organo)
     
 
-    def buscar_match_receptor(self, receptor):
+    def buscar_match_receptor(self, receptor: Receptor):
         for i in range(len(self.lista_donantes)):
             for k in range (len(self.lista_donantes[i].lista_organos)):
                 if(receptor.organo_r._tipo == self.lista_donantes[i].lista_organos[k]._tipo and receptor._t_sangre == self.lista_donantes[i]._t_sangre):
