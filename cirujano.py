@@ -1,6 +1,6 @@
 from organo import *
 from enum import Enum
-
+from datetime import *
 class Especialidad(Enum):
     general = 0
     cardiovascular = 1
@@ -16,9 +16,17 @@ class Cirujano:
             self.especialidad = Especialidad(especialidad) #Convierte int a enum
         elif isinstance(especialidad, Especialidad):
             self.especialidad = especialidad #Asigna directamente enum
+        self.fecha_ultima_operacion = None
         self.estado = True #True = Desocupado False = Ocupado
 
-          
+    def determinar_disponibilidad(self, fecha: datetime):
+        if self.fecha_ultima_operacion != None:
+            diferencia = (fecha - self.fecha_ultima_operacion).days
+            if diferencia <=1:
+                self.estado = True
+        else:
+            self.estado = True
+
     def __eq__(self, organo: Organo):
         if isinstance(organo, Organo):
             

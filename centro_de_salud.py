@@ -3,7 +3,8 @@ from helicoptero import Helicoptero
 from ambulancia import Ambulancia
 from random import *
 from organo import *
-from cirujano import Cirujano
+from cirujano import *
+from datetime import *
 
 
 class Centro_Salud:
@@ -58,6 +59,7 @@ class Centro_Salud:
                     self.lista_vehiculos[k+1] = a
     
     def realizar_transplante(self, cirujano: Cirujano, receptor, organo: Organo): #Si importo Receptor da un error de circular import
+        cirujano.estado = False
         if (cirujano == organo):
             probabilidad  = randint(1, 10)
             if (probabilidad >=3 ):
@@ -74,3 +76,22 @@ class Centro_Salud:
             else:
                 receptor.estado = "Inestable"
                 receptor.calcular_prioridad()
+
+
+    def asignar_cirujano(self, receptor, organo: Organo):
+        fecha_transplante = datetime.today()
+        for i in range (len(self.lista_cirujanos)):
+                self.lista_cirujanos[i].determinar_disponibilidad(fecha_transplante)
+                if (self.lista_cirujanos[i] == organo and self.lista_cirujanos[i].estado == True):
+                    self.lista_cirujanos[i].fecha_ultima_operacion = fecha_transplante
+                    self.realizar_transplante(self, self.lista_cirujanos[i], receptor, organo) #si encuentra un cirujano que coincida y esté disponible sale de la función
+                    return
+        #Si no encuentra un especialista disponible, asigna al primer cirujano disponible, no importa especialidad        
+        for i in range (len(self.lista_cirujanos)):
+            self.lista_cirujanos[i].determinar_disponibilidad(fecha_transplante)
+            if (self.lista_cirujanos[i].estado):
+                self.lista_cirujanos[i].fecha_ultima_operacion = fecha_transplante
+                self.realizar_transplante(self, self.lista_cirujanos[i], receptor, organo)
+                return
+        #Despues podriamos cambiar esta funcion para priorizar a los cirujanos generales en caso de que no
+        #haya un especialista
