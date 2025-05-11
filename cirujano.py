@@ -22,7 +22,7 @@ class Cirujano:
     def determinar_disponibilidad(self, fecha: datetime):
         if self.fecha_ultima_operacion != None:
             diferencia = (fecha - self.fecha_ultima_operacion).days
-            if diferencia <=1:
+            if diferencia >=1:
                 self.estado = True
         else:
             self.estado = True
