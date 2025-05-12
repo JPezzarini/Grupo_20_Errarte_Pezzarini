@@ -84,14 +84,15 @@ class Centro_Salud:
                 self.lista_cirujanos[i].determinar_disponibilidad(fecha_transplante)
                 if (self.lista_cirujanos[i] == organo and self.lista_cirujanos[i].estado == True):
                     self.lista_cirujanos[i].fecha_ultima_operacion = fecha_transplante
-                    self.realizar_transplante(self, self.lista_cirujanos[i], receptor, organo) #si encuentra un cirujano que coincida y esté disponible sale de la función
-                    return
+                    self.lista_cirujanos[i].estado = False
+                    return self.realizar_transplante(self, self.lista_cirujanos[i], receptor, organo) #si encuentra un cirujano que coincida y esté disponible sale de la función
+                    
         #Si no encuentra un especialista disponible, asigna al primer cirujano disponible, no importa especialidad        
         for i in range (len(self.lista_cirujanos)):
             self.lista_cirujanos[i].determinar_disponibilidad(fecha_transplante)
             if (self.lista_cirujanos[i].estado):
                 self.lista_cirujanos[i].fecha_ultima_operacion = fecha_transplante
-                self.realizar_transplante(self, self.lista_cirujanos[i], receptor, organo)
-                return
+                return self.realizar_transplante(self, self.lista_cirujanos[i], receptor, organo)
+                
         #Despues podriamos cambiar esta funcion para priorizar a los cirujanos generales en caso de que no
         #haya un especialista
