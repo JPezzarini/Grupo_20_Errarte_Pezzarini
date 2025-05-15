@@ -107,6 +107,23 @@ class Sistema():
                         receptor.estado = "Inestable"
                 
                 
+    def listar_receptores(self):
+        if self.lista_receptores == False:
+            print("No hay receptores en el sistema")
+            return
+        
+        for i in range (len(self.lista_receptores)):
+            print(f"Nombre: {self.lista_receptores[i].nombre}, DNI: {self.lista_receptores[i].DNI}, Ingreso al sistema: {self.lista_receptores[i].dt_espera}, Organo receptor: {self.lista_receptores[i].organo_r}")
+    
+
+    def listar_donantes(self):
+        if self.lista_donantes == False:
+            print("No hay donantes en el sistema")
+            return
+        
+        for i in range (len(self.lista_donantes)):
+            print(f"Nombre: {self.lista_donantes[i].nombre}, DNI: {self.lista_donantes[i].DNI}, Fallecimiento: {self.lista_donantes[i].dt_fallecimiento}, Organos disponibles: {[organo._tipo.name for organo in self.lista_donantes[i].lista_organos]}")
+    
                 
 
         
