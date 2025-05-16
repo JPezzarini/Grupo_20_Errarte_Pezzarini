@@ -34,9 +34,11 @@ class Sistema():
 
     def recibir_donante(self, donante: Donante):
         self.lista_donantes.append(donante)
-        for i in range(len(donante.lista_organos)):
+        i=0
+        while i < (len(donante.lista_organos)):
             k = i
             self.buscar_match_donante(donante,donante.lista_organos[i],k)
+            i+=1
 
     def recibir_receptor(self, receptor: Receptor):
         self.lista_receptores.append(receptor)
@@ -70,42 +72,63 @@ class Sistema():
 
     def buscar_match_donante(self,donante: Donante,organo: Organo, k):
         receptores = []
+
         for i in range(len(self.lista_receptores)):
             if(self.lista_receptores[i].organo_r._tipo == organo._tipo and self.lista_receptores[i]._t_sangre == donante._t_sangre):
                 receptores.append(self.lista_receptores[i])
+        
         if(len(receptores) == 0):
-            print("no se encontraron receptores que cualifiquen") #printea si no encuentra match
+            print("No se encontraron receptores que cualifiquen") #printea si no encuentra match
             return
+        
         receptor_match = self.elegir_receptor(receptores)
-        hoy = date.today()
-        donante.lista_organos[k].dt_hablacion = datetime.combine(hoy,time(random.randint(0,23),random.randint(0,59),random.randint(0,59))) # creo una fecha y tiempo de ablacion random
-        fecha_hablacion = donante.lista_organos[k].dt_hablacion #guardo la fecha en una variable para pasarla entre funciones
-        viaje = f"{donante.centro_salud.nombre}-{receptor_match.centro_salud.nombre}" #me guardo el viaje para pasarselo al vehiculo
-        donante.centro_salud.asignar_vehiculo(receptor_match.centro_salud,viaje,fecha_hablacion)
-        if (receptor_match.centro_salud.asignar_cirujano(receptor_match, donante.lista_organos[k])): #si sale bien se retira el organo y se retira el receptor de la lista
-            self.lista_receptores.remove(receptor_match)
-            donante.lista_organos.remove(organo)
-        else: #si sale mal se pierde el organo y el receptor pasa a estar inestable
-            donante.lista_organos.remove(organo)
-            receptor_match.estado = "Inestable"
+        
+        if (receptor_match.centro_salud.chequear_disponibilidad_cirujano()):
+            
+            hoy = date.today()
+            donante.lista_organos[k].dt_hablacion = datetime.combine(hoy,time(random.randint(0,23),random.randint(0,59),random.randint(0,59))) # creo una fecha y tiempo de ablacion random
+            fecha_hablacion = donante.lista_organos[k].dt_hablacion #guardo la fecha en una variable para pasarla entre funciones
+            viaje = f"{donante.centro_salud.nombre}-{receptor_match.centro_salud.nombre}" #me guardo el viaje para pasarselo al vehiculo
+            donante.centro_salud.asignar_vehiculo(receptor_match.centro_salud,viaje,fecha_hablacion)
+            
+            if (receptor_match.centro_salud.asignar_cirujano(receptor_match, donante.lista_organos[k])): #si sale bien se retira el organo y se retira el receptor de la lista
+                self.lista_receptores.remove(receptor_match)
+                donante.lista_organos.remove(organo)
+            
+            else: #si sale mal se pierde el organo y el receptor pasa a estar inestable
+                donante.lista_organos.remove(organo)
+                receptor_match.estado = "Inestable"
+        
+        else:
+            print("No hay cirujanos disponibles")
     
 
     def buscar_match_receptor(self, receptor: Receptor):
-        for i in range(len(self.lista_donantes)):
-            for k in range (len(self.lista_donantes[i].lista_organos)):
+        i = 0
+        while i < (len(self.lista_donantes)):
+            k=0
+            while k < (len(self.lista_donantes[i].lista_organos)):
                 if(receptor.organo_r._tipo == self.lista_donantes[i].lista_organos[k]._tipo and receptor._t_sangre == self.lista_donantes[i]._t_sangre):
-                    hoy = date.today()
-                    self.lista_donantes[i].lista_organos[k].dt_hablacion = datetime.combine(hoy,time(random.randint(0,23),random.randint(0,59),random.randint(0,59))) # creo una fecha y tiempo de ablacion random
-                    fecha_hablacion = self.lista_donantes[i].lista_organos[k].dt_hablacion #guardo la fecha en una variable para pasarla entre funciones
-                    viaje = f"{self.lista_donantes[i].centro_salud.nombre}-{receptor.centro_salud.nombre}" #me guardo el viaje para pasarselo al vehiculo
-                    self.lista_donantes[i].centro_salud.asignar_vehiculo(receptor.centro_salud,viaje,fecha_hablacion)
-                    if (receptor.centro_salud.asignar_cirujano(receptor, self.lista_donantes[i].lista_organos[k])): #si sale bien se retira el organo y se retira el receptor de la lista
-                        self.lista_receptores.remove(receptor)
-                        self.lista_donantes[i].lista_organos.pop(k)
-                    else: #si sale mal se pierde el organo y el receptor pasa a estar inestable
-                        self.lista_donantes[i].lista_organos.pop(k)
-                        receptor.estado = "Inestable"
-                
+                    if (receptor.centro_salud.chequear_disponibilidad_cirujano()):
+                        hoy = date.today()
+                        self.lista_donantes[i].lista_organos[k].dt_hablacion = datetime.combine(hoy,time(random.randint(0,23),random.randint(0,59),random.randint(0,59))) # creo una fecha y tiempo de ablacion random
+                        fecha_hablacion = self.lista_donantes[i].lista_organos[k].dt_hablacion #guardo la fecha en una variable para pasarla entre funciones
+                        viaje = f"{self.lista_donantes[i].centro_salud.nombre}-{receptor.centro_salud.nombre}" #me guardo el viaje para pasarselo al vehiculo 
+                        if(self.lista_donantes[i].centro_salud.asignar_vehiculo(receptor.centro_salud,viaje,fecha_hablacion)):
+
+                            if (receptor.centro_salud.asignar_cirujano(receptor, self.lista_donantes[i].lista_organos[k])): #si sale bien se retira el organo y se retira el receptor de la lista
+                                self.lista_receptores.remove(receptor)
+    
+                            else: #si sale mal se pierde el organo y el receptor pasa a estar inestable
+                                receptor.estado = "Inestable"
+    
+                            self.lista_donantes[i].lista_organos.pop(k)
+                            if (self.lista_donantes[i].lista_organos): #Si el donante ya no tiene más organos se retira al donante de la lista
+                                self.lista_donantes.pop(i)
+                    else:
+                        print("No hay cirujanos disponibles")
+                k+=1
+            i+= 1
                 
     def listar_receptores(self):
         if self.lista_receptores == False:

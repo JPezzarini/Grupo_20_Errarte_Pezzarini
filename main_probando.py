@@ -52,9 +52,13 @@ receptores = [
     Receptor("Marcos", 49990000, datetime(1991, 12, 3), "M", "+54 911 0120-3456", "O-", cs2, Organo(Tipo(9)), datetime(2023, 8, 30), "Diabetes", "Estable"),
 ]
 
-Incucai = Sistema(receptores,donantes,[cs1,cs2])
-aaa = Receptor("Ana", 41321789, datetime(1989, 6, 10), "F", "+54 911 1231-4567", "A+", cs1, Organo(Tipo(1)), datetime(2024, 5, 8), "Insuficiencia cardíaca", "Crítico")
+Incucai = Sistema([cs1,cs2],receptores, donantes)
+aaa = Receptor("Ana", 41321789, datetime(1989, 6, 10), "F", "+54 911 1231-4567", "A+", cs1, Organo(Tipo(1)), datetime(2024, 5, 8), "Insuficiencia cardíaca", "Estable")
 organo1 = Organo(Tipo(1))
 organo2 = Organo(Tipo(8))
 
-cs1.realizar_transplante(fischer, aaa, organo1)
+#cs1.realizar_transplante(fischer, aaa, organo1)
+#Incucai.recibir_paciente(aaa)
+
+fisura = Donante("Roberto", 345550542, datetime(1970, 5, 23), "M", "+54 911 1231-4567", "A+", cs2, datetime(2025, 5, 14), [Organo(Tipo(2))])
+Incucai.recibir_paciente(fisura)
