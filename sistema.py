@@ -118,10 +118,10 @@ class Sistema():
 
                             if (receptor.centro_salud.asignar_cirujano(receptor, self.lista_donantes[i].lista_organos[k])): #si sale bien se retira el organo y se retira el receptor de la lista
                                 self.lista_receptores.remove(receptor)
-    
+
                             else: #si sale mal se pierde el organo y el receptor pasa a estar inestable
                                 receptor.estado = "Inestable"
-    
+
                             self.lista_donantes[i].lista_organos.pop(k)
                             if (self.lista_donantes[i].lista_organos): #Si el donante ya no tiene más organos se retira al donante de la lista
                                 self.lista_donantes.pop(i)
@@ -130,6 +130,27 @@ class Sistema():
                 k+=1
             i+= 1
                 
+    def crear_paciente(self, centro_salud: Centro_Salud):
+        nombre = str(input("Ingrese el nombre del paciente: "))
+        DNI = int(input("Ingrese el DNI del paciente: "))
+        fecha_nacimiento = str(input("Ingrese su fecha de nacimiento AA/MM/DD: "))
+        sexo = str(input("Ingrese el sexo del paciente, Masculino = M, Femenino = F: "))
+        telefono = str(input("Ingrese su numero de telefono: "))
+        tipo_sangre = str(input("Ingrese su tipo de sangre: "))
+        tipo_paciente = input("Su paciente es donante o receptor? Donante = D; Receptor = R: ")
+        if (tipo_paciente == "D"):
+            dt_fallecimiento = str(input("ingrese la fecha de fallecimiento: "))
+            lista_organos = []
+            cantidad_organos = int(input("ingrese la cantidad de organos: "))
+            for i in range (0,cantidad_organos):
+                tipo = str(input("ingrese el tipo de ogano: "))
+                organo = Organo(tipo)
+                lista_organos.append(organo)
+            paciente = Donante(nombre, DNI, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, dt_fallecimiento, lista_organos)
+        #Falta el else para ingresar receptores
+
+
+
     def listar_receptores(self):
         if self.lista_receptores == False:
             print("No hay receptores en el sistema")

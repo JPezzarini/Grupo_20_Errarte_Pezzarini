@@ -7,7 +7,7 @@ from centro_de_salud import Centro_Salud
 class Paciente(ABC):
 
 
-    def __init__(self, nombre: str, DNI: int, fecha_nac: datetime, sexo: str, tel: str, t_sangre: str, centro_salud: Centro_Salud):
+    def __init__(self, nombre: str, DNI: int, fecha_nac: str, sexo: str, tel: str, t_sangre: str, centro_salud: Centro_Salud):
         """
         IMPORTANTE: hacer una funcion para pedir datos, y adentro de ahi
         """
