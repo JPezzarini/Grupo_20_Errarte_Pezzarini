@@ -133,13 +133,13 @@ class Sistema():
     def crear_paciente(self, centro_salud: Centro_Salud):
         nombre = str(input("Ingrese el nombre del paciente: "))
         DNI = int(input("Ingrese el DNI del paciente: "))
-        fecha_nacimiento = str(input("Ingrese su fecha de nacimiento AA/MM/DD: "))
+        fecha_nacimiento = str(input("Ingrese su fecha de nacimiento AAAA/MM/DD: "))
         sexo = str(input("Ingrese el sexo del paciente, Masculino = M, Femenino = F: "))
         telefono = str(input("Ingrese su numero de telefono: "))
         tipo_sangre = str(input("Ingrese su tipo de sangre: "))
         tipo_paciente = input("Su paciente es donante o receptor? Donante = D; Receptor = R: ")
         if (tipo_paciente == "D"):
-            dt_fallecimiento = str(input("ingrese la fecha de fallecimiento: "))
+            dt_fallecimiento = str(input("ingrese la fecha de fallecimiento AAAA/MM/DD: "))
             lista_organos = []
             cantidad_organos = int(input("ingrese la cantidad de organos: "))
             for i in range (0,cantidad_organos):
@@ -147,7 +147,14 @@ class Sistema():
                 organo = Organo(tipo)
                 lista_organos.append(organo)
             paciente = Donante(nombre, DNI, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, dt_fallecimiento, lista_organos)
-        #Falta el else para ingresar receptores
+        else:
+            tipo = str(input("ingrese el tipo de ogano: "))
+            organo_r = Organo(tipo)
+            str_espera = str(input("ingrese la fecha de ingreso al sistema del instituto AAAA/MM/DD: "))
+            dt_espera = datetime.strptime(str_espera,"%Y-%m-%d")
+            patologia = str(input("ingrese su patologia: "))
+            estado = str(input("ingrese su estado: "))
+            paciente = Receptor(nombre, DNI, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, organo_r, dt_espera, patologia,estado)
 
 
 

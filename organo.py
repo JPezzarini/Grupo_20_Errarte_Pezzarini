@@ -13,8 +13,6 @@ class Tipo(Enum):
     páncreas = 9
 
 class Organo():
-
-
     def __init__(self, tipo):
         if isinstance(tipo, int):
             self._tipo = Tipo(tipo) #Convierto int a enum

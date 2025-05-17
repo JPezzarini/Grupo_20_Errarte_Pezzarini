@@ -59,6 +59,11 @@ organo2 = Organo(Tipo(8))
 
 #cs1.realizar_transplante(fischer, aaa, organo1)
 #Incucai.recibir_paciente(aaa)
+Incucai.crear_paciente(cs1)
 
-fisura = Donante("Roberto", 345550542, datetime(1970, 5, 23), "M", "+54 911 1231-4567", "A+", cs2, datetime(2025, 5, 14), [Organo(Tipo(2))])
-Incucai.recibir_paciente(fisura)
+#fisura = Donante("Roberto", 345550542, datetime(1970, 5, 23), "M", "+54 911 1231-4567", "A+", cs2, datetime(2025, 5, 14), [Organo(Tipo(2))])
+#Incucai.recibir_paciente(fisura)
+
+#string = "2025-05-27"
+#dt = datetime.strptime(string,"%Y-%m-%d")
+#print(dt)
