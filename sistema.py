@@ -6,9 +6,9 @@ from donantes import Donante
 from receptores import Receptor
 from vehiculo import Vehiculo
 import random
+from organo import *
 if TYPE_CHECKING:
     from pacientes import Paciente
-    from organo import Organo
     from centro_de_salud import Centro_Salud
     from ambulancia import Ambulancia
     from avion import Avion
@@ -143,13 +143,13 @@ class Sistema():
             lista_organos = []
             cantidad_organos = int(input("ingrese la cantidad de organos: "))
             for i in range (0,cantidad_organos):
-                tipo = str(input("ingrese el tipo de ogano: "))
-                organo = Organo(tipo)
-                lista_organos.append(organo)
+                tipo = str(input("ingrese el tipo de organo: "))
+                organo_i = Organo(Tipo[tipo])
+                lista_organos.append(organo_i)
             paciente = Donante(nombre, DNI, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, dt_fallecimiento, lista_organos)
         else:
-            tipo = str(input("ingrese el tipo de ogano: "))
-            organo_r = Organo(tipo)
+            tipo = str(input("ingrese el tipo de organo: "))
+            organo_r = Organo(Tipo[tipo])
             str_espera = str(input("ingrese la fecha de ingreso al sistema del instituto AAAA/MM/DD: "))
             dt_espera = datetime.strptime(str_espera,"%Y-%m-%d")
             patologia = str(input("ingrese su patologia: "))

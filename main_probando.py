@@ -54,7 +54,7 @@ receptores = [
 
 Incucai = Sistema([cs1,cs2],receptores, donantes)
 aaa = Receptor("Ana", 41321789, datetime(1989, 6, 10), "F", "+54 911 1231-4567", "A+", cs1, Organo(Tipo(1)), datetime(2024, 5, 8), "Insuficiencia cardíaca", "Estable")
-organo1 = Organo(Tipo(1))
+organo1 = Organo(1)
 organo2 = Organo(Tipo(8))
 
 #cs1.realizar_transplante(fischer, aaa, organo1)
