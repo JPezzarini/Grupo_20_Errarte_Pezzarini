@@ -26,6 +26,9 @@ class Sistema():
 
 
     def recibir_paciente(self, paciente: Paciente):
+        # esta funcon agrega un paciente a sistema, lo agreaga a la lista de donantes o receptores dependiendo lo que se ingrese
+        #llama a las funciones recibir_donante y recibir_receptor respectivamente
+
         if isinstance(paciente, Donante):
             self.recibir_donante(paciente)
         else:
@@ -33,6 +36,9 @@ class Sistema():
 
 
     def recibir_donante(self, donante: Donante):
+        #agrega al donante al sistema y busca match con los receptores del mismo
+        #los while sirven para que no se vayan de rango la slistas si retiramos un elemento de ellas
+
         self.lista_donantes.append(donante)
         i=0
         while i < (len(donante.lista_organos)):
@@ -41,6 +47,8 @@ class Sistema():
             i+=1
 
     def recibir_receptor(self, receptor: Receptor):
+        #agrega al receptor al sistema y busca match con los donantes del mismo
+
         self.lista_receptores.append(receptor)
         self.buscar_match_receptor(receptor)
     
@@ -60,6 +68,8 @@ class Sistema():
 
 
     def elegir_receptor_prioridad(self, receptores: list):
+        #se ordena la lista de receptores compatibles en, caso de que tengan la misma prioridad, por antiguedad en el sistema
+
         for i in range(len(receptores)):
             for k in range (0,len(receptores)-1-i):
                 if(receptores[k+1].dt_espera > receptores[k].dt_espera and receptores[k+1].prioridad == receptores[k].prioridad):
@@ -71,8 +81,10 @@ class Sistema():
 
 
     def buscar_match_donante(self,donante: Donante,organo: Organo, k):
-        receptores = []
+        #busca receptores compatibles segun el donante pasado como parametro, armando una lista de ellos
+        #pasa la lista a las funciones de ordenamiento, que devuelven el receptor final para la operacion 
 
+        receptores = []
         for i in range(len(self.lista_receptores)):
             if(self.lista_receptores[i].organo_r._tipo == organo._tipo and self.lista_receptores[i]._t_sangre == donante._t_sangre):
                 receptores.append(self.lista_receptores[i])
@@ -81,14 +93,14 @@ class Sistema():
             print("No se encontraron receptores que cualifiquen") #printea si no encuentra match
             return
         
-        receptor_match = self.elegir_receptor(receptores)
+        receptor_match = self.elegir_receptor(receptores) #receptor de mayor prioridad
         
         if (receptor_match.centro_salud.chequear_disponibilidad_cirujano()):
             
             hoy = date.today()
             donante.lista_organos[k].dt_hablacion = datetime.combine(hoy,time(random.randint(0,23),random.randint(0,59),random.randint(0,59))) # creo una fecha y tiempo de ablacion random
-            fecha_hablacion = donante.lista_organos[k].dt_hablacion #guardo la fecha en una variable para pasarla entre funciones
-            viaje = f"{donante.centro_salud.nombre}-{receptor_match.centro_salud.nombre}" #me guardo el viaje para pasarselo al vehiculo
+            fecha_hablacion = donante.lista_organos[k].dt_hablacion #guarda la fecha en una variable para pasarla entre funciones
+            viaje = f"{donante.centro_salud.nombre}-{receptor_match.centro_salud.nombre}" #guarda el viaje para pasarselo al vehiculo
             donante.centro_salud.asignar_vehiculo(receptor_match.centro_salud,viaje,fecha_hablacion)
             
             if (receptor_match.centro_salud.asignar_cirujano(receptor_match, donante.lista_organos[k])): #si sale bien se retira el organo y se retira el receptor de la lista
@@ -104,6 +116,9 @@ class Sistema():
     
 
     def buscar_match_receptor(self, receptor: Receptor):
+        #busca al primer donante compatible segun el receptor pasado como parametro
+        #los while sirven para que no se vayan de rango la slistas si retiramos un elemento de ellas
+
         i = 0
         while i < (len(self.lista_donantes)):
             k=0
@@ -131,6 +146,8 @@ class Sistema():
             i+= 1
                 
     def crear_paciente(self, centro_salud: Centro_Salud):
+        #se crea un paciente pasando los parametros a mano, luego llama a las respectivas funciones de buscar_match
+
         nombre = str(input("Ingrese el nombre del paciente: "))
         DNI = int(input("Ingrese el DNI del paciente: "))
         fecha_nacimiento = str(input("Ingrese su fecha de nacimiento AAAA/MM/DD: "))
@@ -147,6 +164,12 @@ class Sistema():
                 organo_i = Organo(Tipo[tipo])
                 lista_organos.append(organo_i)
             paciente = Donante(nombre, DNI, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, dt_fallecimiento, lista_organos)
+            i=0
+            while i < (len(paciente.lista_organos)):
+                k = i
+                self.buscar_match_donante(paciente, paciente.lista_organos[i],k)
+                i+=1
+
         else:
             tipo = str(input("ingrese el tipo de organo: "))
             organo_r = Organo(Tipo[tipo])
@@ -155,10 +178,13 @@ class Sistema():
             patologia = str(input("ingrese su patologia: "))
             estado = str(input("ingrese su estado: "))
             paciente = Receptor(nombre, DNI, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, organo_r, dt_espera, patologia,estado)
+            self.buscar_match_receptor(paciente)
 
 
 
     def listar_receptores(self):
+        #printea la lista de receptores del sistema
+
         if self.lista_receptores == False:
             print("No hay receptores en el sistema")
             return
@@ -168,6 +194,8 @@ class Sistema():
     
 
     def listar_donantes(self):
+        #printea la lista de donantes del sistema
+
         if self.lista_donantes == False:
             print("No hay donantes en el sistema")
             return
