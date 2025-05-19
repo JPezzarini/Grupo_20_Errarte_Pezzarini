@@ -149,7 +149,7 @@ class Sistema():
         #se crea un paciente pasando los parametros a mano, luego llama a las respectivas funciones de buscar_match
 
         nombre = str(input("Ingrese el nombre del paciente: "))
-        DNI = int(input("Ingrese el DNI del paciente: "))
+        dni = int(input("Ingrese el DNI del paciente: "))
         fecha_nacimiento = str(input("Ingrese su fecha de nacimiento AAAA/MM/DD: "))
         sexo = str(input("Ingrese el sexo del paciente, Masculino = M, Femenino = F: "))
         telefono = str(input("Ingrese su numero de telefono: "))
@@ -163,7 +163,7 @@ class Sistema():
                 tipo = str(input("ingrese el tipo de organo: "))
                 organo_i = Organo(Tipo[tipo])
                 lista_organos.append(organo_i)
-            paciente = Donante(nombre, DNI, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, dt_fallecimiento, lista_organos)
+            paciente = Donante(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, dt_fallecimiento, lista_organos)
             i=0
             while i < (len(paciente.lista_organos)):
                 k = i
@@ -177,7 +177,7 @@ class Sistema():
             dt_espera = datetime.strptime(str_espera,"%Y-%m-%d")
             patologia = str(input("ingrese su patologia: "))
             estado = str(input("ingrese su estado: "))
-            paciente = Receptor(nombre, DNI, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, organo_r, dt_espera, patologia,estado)
+            paciente = Receptor(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, organo_r, dt_espera, patologia,estado)
             self.buscar_match_receptor(paciente)
 
 
@@ -190,8 +190,7 @@ class Sistema():
             return
         
         for i in range (len(self.lista_receptores)):
-            print(f"Nombre: {self.lista_receptores[i].nombre}, DNI: {self.lista_receptores[i].DNI}, Ingreso al sistema: {self.lista_receptores[i].dt_espera}, Organo receptor: {self.lista_receptores[i].organo_r}")
-    
+            print(self.lista_receptores[i].__repr__())
 
     def listar_donantes(self):
         #printea la lista de donantes del sistema
@@ -201,8 +200,7 @@ class Sistema():
             return
         
         for i in range (len(self.lista_donantes)):
-            print(f"Nombre: {self.lista_donantes[i].nombre}, DNI: {self.lista_donantes[i].DNI}, Fallecimiento: {self.lista_donantes[i].dt_fallecimiento}, Organos disponibles: {[organo._tipo.name for organo in self.lista_donantes[i].lista_organos]}")
-    
+            print(self.lista_donantes[i].__repr__())
                 
 
         

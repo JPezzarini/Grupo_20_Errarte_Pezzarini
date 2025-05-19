@@ -26,7 +26,7 @@ cs2 = Centro_Salud("Clínica del Sur", "Avellaneda", "Buenos Aires", "+54 911 87
 
 # Donantes (10 por centro)
 donantes = [
-    Donante("Matías", 47391713, "datetime(1990, 5, 12)", "M", "+54 911 1111-1111", "A+", cs1, datetime(2025, 4, 20), [Organo(Tipo(1)), Organo(7)]),
+    Donante("Matías", 47391713, datetime(1990, 5, 12), "M", "+54 911 1111-1111", "A+", cs1, datetime(2025, 4, 20), [Organo(Tipo(1)), Organo(7)]),
     Donante("Lucía", 40123567, datetime(1985, 8, 24), "F", "+54 911 2222-2222", "B-", cs1, datetime(2025, 3, 15), [ Organo(Tipo(8))]),
     Donante("Javier", 38912222, datetime(1978, 1, 10), "M", "+54 911 3333-3333", "AB+", cs1, datetime(2025, 2, 5), [Organo(Tipo(2))]),
     Donante("Clara", 42543123, datetime(1992, 12, 2), "F", "+54 911 4444-4444", "O-", cs1, datetime(2025, 1, 30), [Organo(Tipo(1)), Organo(Tipo(9))]),
@@ -59,7 +59,7 @@ organo2 = Organo(Tipo(8))
 
 #cs1.realizar_transplante(fischer, aaa, organo1)
 #Incucai.recibir_paciente(aaa)
-Incucai.crear_paciente(cs1)
+#Incucai.crear_paciente(cs1)
 
 #fisura = Donante("Roberto", 345550542, datetime(1970, 5, 23), "M", "+54 911 1231-4567", "A+", cs2, datetime(2025, 5, 14), [Organo(Tipo(2))])
 #Incucai.recibir_paciente(fisura)
@@ -67,3 +67,6 @@ Incucai.crear_paciente(cs1)
 #string = "2025-05-27"
 #dt = datetime.strptime(string,"%Y-%m-%d")
 #print(dt)
+
+Incucai.listar_donantes()
+#Incucai.listar_receptores()

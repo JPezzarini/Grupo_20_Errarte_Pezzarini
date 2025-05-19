@@ -7,12 +7,12 @@ from centro_de_salud import Centro_Salud
 class Paciente(ABC):
 
 
-    def __init__(self, nombre: str, DNI: int, fecha_nac: str, sexo: str, tel: str, t_sangre: str, centro_salud: Centro_Salud):
+    def __init__(self, nombre: str, dni: int, fecha_nac: str, sexo: str, tel: str, t_sangre: str, centro_salud: Centro_Salud):
         """
         IMPORTANTE: hacer una funcion para pedir datos, y adentro de ahi
         """
         self._nombre = nombre
-        self._DNI = DNI
+        self._dni = dni
         self._fecha_nac = fecha_nac
         self._sexo = sexo
         self.tel = tel
@@ -20,7 +20,7 @@ class Paciente(ABC):
         self.centro_salud = centro_salud
     
     @abstractmethod
-    def _nada(self):
+    def __repr__(self):
         pass
     
 
