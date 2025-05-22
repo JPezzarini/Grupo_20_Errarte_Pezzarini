@@ -149,12 +149,50 @@ class Sistema():
         #se crea un paciente pasando los parametros a mano, luego llama a las respectivas funciones de buscar_match
 
         nombre = str(input("Ingrese el nombre del paciente: "))
-        dni = int(input("Ingrese el DNI del paciente: "))
+        try:
+            dni = int(input("Ingrese el DNI del paciente: "))
+            for i in range(len(self.lista_receptores)):
+                if(self.lista_receptores[i]._dni == dni):
+                    raise ValueError("Entrada inválida, DNI ya registrado")
+            for i in range(len(self.lista_donantes)):
+                if(self.lista_donantes[i]._dni == dni):
+                    raise ValueError("Entrada inválida, DNI ya registrado")    
+        except ValueError as e:
+            print(e)
+            exit(1)
         fecha_nacimiento = str(input("Ingrese su fecha de nacimiento AAAA/MM/DD: "))
-        sexo = str(input("Ingrese el sexo del paciente, Masculino = M, Femenino = F: "))
-        telefono = str(input("Ingrese su numero de telefono: "))
-        tipo_sangre = str(input("Ingrese su tipo de sangre: "))
-        tipo_paciente = input("Su paciente es donante o receptor? Donante = D; Receptor = R: ")
+        try:
+            sexo = str(input("Ingrese el sexo del paciente, Masculino = M, Femenino = F: ").strip().upper())
+            if sexo not in ("M", "F"):
+               raise ValueError("Entrada inválida, solo se acepta 'M' o 'F'.")
+        except ValueError as e:
+            print(e)
+            exit(1)
+        try:
+            telefono = str(input("Ingrese el telefono del paciente: "))
+            for i in range(len(self.lista_receptores)):
+                if(self.lista_receptores[i].tel == telefono):
+                    raise ValueError("Entrada inválida, telefono ya registrado")
+            for i in range(len(self.lista_donantes)):
+                if(self.lista_donantes[i].tel == telefono):
+                    raise ValueError("Entrada inválida, telefono ya registrado")    
+        except ValueError as e:
+            print(e)
+            exit(1)
+        try:
+            tipo_sangre = str(input("Ingrese su tipo de sangre: "))
+            if sexo not in ("A+","A-","B+","B-","O+","O-","AB+","AB-"):
+               raise ValueError("Entrada inválida, tipo de sangre no existente")
+        except ValueError as e:
+            print(e)
+            exit(1)
+        try:
+            tipo_paciente = input("Su paciente es donante o receptor? Donante = D; Receptor = R: ")
+            if tipo_paciente not in ("D", "R"):
+               raise ValueError("Entrada inválida, tipo de paciente no existente")
+        except ValueError as e:
+            print(e)
+            exit(1)
         if (tipo_paciente == "D"):
             dt_fallecimiento = str(input("ingrese la fecha de fallecimiento AAAA/MM/DD: "))
             lista_organos = []
