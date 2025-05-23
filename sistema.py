@@ -241,4 +241,13 @@ class Sistema():
             print(self.lista_donantes[i].__repr__())
                 
 
-        
+    def buscar_receptores_centro_salud(self, centro_de_salud: Centro_Salud):
+        for i in range(len(self.lista_receptores)):
+            if (self.lista_receptores[i].centro_salud == centro_de_salud):
+                print(self.lista_receptores[i].__repr__())
+    
+    def informar_prioridad_receptor(self, dni_receptor):
+        for i in range(len(self.lista_receptores)):
+            if (self.lista_receptores[i]._dni == dni_receptor):
+                print(f"En la escala de prioridad, el paciente se encuentra en el nivel {self.lista_receptores[i].prioridad}")
+                
