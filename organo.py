@@ -18,5 +18,5 @@ class Organo():
             self._tipo = Tipo(tipo) #Convierto int a enum
         elif isinstance(tipo, Tipo):
             self._tipo = tipo #Asigno directamente el enum
-        self.dt_hablacion = None
+        self.dt_ablacion = None
 
