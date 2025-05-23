@@ -8,7 +8,16 @@ from datetime import *
 
 
 class Centro_Salud:
-
+    """
+    Esta clase representa un centro de salud que gestiona cirujanos y vehículos para realizar trasplantes.
+    Atributos:
+        nombre (str): El nombre del centro de salud.
+        partido (str): El partido donde se ubica el centro de salud.
+        provincia (str): La provincia donde se ubica el centro de salud.
+        telefono (str): El número de teléfono del centro de salud.
+        lista_cirujanos (list): Lista de cirujanos disponibles en el centro de salud.
+        lista_vehiculos (list): Lista de vehículos disponibles para el transporte.
+    """
 
     def __init__(self, nombre: str, partido: str, provincia: str, tel: str, cirujanos: list, vehiculos: list):
 
@@ -21,7 +30,17 @@ class Centro_Salud:
 
 
 
-    def asignar_vehiculo(self, centro_receptor, viaje, fecha_ablacion_donante): #falta determinar nivel de trafico y distancia de viaje
+    def asignar_vehiculo(self, centro_receptor, viaje, fecha_ablacion_donante) -> bool:
+        """
+        Asigna un vehículo adecuado para el transporte de órganos según la ubicación del centro receptor. 
+        Llama a la función ordenar_vehículo_velocidad()
+        params:
+            - centro_receptor: El centro de salud del paciente receptor.
+            - viaje: Información sobre el viaje que se va a realizar.
+            - fecha_ablacion_donante: La fecha de ablación del órgano del donante.
+        returns:
+            True si se logró asignar un vehículo correctamente, False en caso contrario.
+        """        
         self.ordenar_vehiculo_velocidad()
         if (self.provincia == centro_receptor.provincia and self.partido == centro_receptor.partido):
             for i in range (len(self.lista_vehiculos)):
@@ -48,10 +67,13 @@ class Centro_Salud:
                         self.lista_vehiculos[i].realizar_transporte(distancia, nivel_trafico, fecha_ablacion_donante, viaje)
                         return True
         
-        print("No se pudo asignar un vehículo adecuado en este momento") #Printea solo si no encontro un vehiculo 
+        print("No se pudo asignar un vehículo adecuado en este momento")
         return False
     
-    def ordenar_vehiculo_velocidad(self) -> None: 
+    def ordenar_vehiculo_velocidad(self) -> None:
+        """
+        Ordena la lista de vehículos por velocidad en orden descendente.
+        """ 
         for i in range (len(self.lista_vehiculos)):
             for k in range (0, len(self.lista_vehiculos)-1-i):
                 if(self.lista_vehiculos[k+1].velocidad > self.lista_vehiculos[k].velocidad):
@@ -59,7 +81,17 @@ class Centro_Salud:
                     self.lista_vehiculos[k] = self.lista_vehiculos[k+1]
                     self.lista_vehiculos[k+1] = a
     
-    def realizar_transplante(self, cirujano: Cirujano, receptor, organo: Organo) -> bool: #Si importo Receptor da un error de circular import
+    def realizar_transplante(self, cirujano: Cirujano, receptor, organo: Organo) -> bool:
+        """
+        Realiza un trasplante el transplante del órgano del donante al receptor.
+        El transplante es realizado por el cirujano asignado previamente.
+        params:
+            - cirujano: El cirujano que realizará el trasplante.
+            - receptor: El receptor del órgano trasplantado.
+            - organo: El órgano que se va a trasplantar.
+        returns:
+            True si la operación fue exitosa, False en caso contrario.
+        """
         cirujano.estado = False
         if (cirujano == organo):
             probabilidad  = randint(1, 10)
@@ -86,6 +118,15 @@ class Centro_Salud:
 
 
     def asignar_cirujano(self, receptor, organo: Organo):
+        """
+        Asigna un cirujano disponible para realizar un trasplante.
+        Llama a la función realizar_transplante.
+        params:
+            - receptor: El receptor del órgano trasplantado.
+            - organo: El órgano que se va a trasplantar.
+        returns:
+            Retorna el valor de la función realizar_transplante.
+        """
         fecha_transplante = datetime.today()
         for i in range (len(self.lista_cirujanos)):
                 self.lista_cirujanos[i].determinar_disponibilidad(fecha_transplante)
@@ -101,10 +142,13 @@ class Centro_Salud:
                 self.lista_cirujanos[i].fecha_ultima_operacion = fecha_transplante
                 return self.realizar_transplante(self, self.lista_cirujanos[i], receptor, organo)
                 
-        #Despues podriamos cambiar esta funcion para priorizar a los cirujanos generales en caso de que no
-        #haya un especialista
 
     def chequear_disponibilidad_cirujano(self):
+        """
+        Verifica si hay cirujanos disponibles en el centro de salud.
+        returns:
+            True si hay al menos un cirujano disponible, False en caso contrario.
+        """
         cont = 0
         for i in range (len(self.lista_cirujanos)):
             if self.lista_cirujanos[i].estado == True:
