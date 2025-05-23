@@ -51,7 +51,7 @@ class Centro_Salud:
         print("No se pudo asignar un vehículo adecuado en este momento") #Printea solo si no encontro un vehiculo 
         return False
     
-    def ordenar_vehiculo_velocidad(self):
+    def ordenar_vehiculo_velocidad(self) -> None: 
         for i in range (len(self.lista_vehiculos)):
             for k in range (0, len(self.lista_vehiculos)-1-i):
                 if(self.lista_vehiculos[k+1].velocidad > self.lista_vehiculos[k].velocidad):
@@ -59,7 +59,7 @@ class Centro_Salud:
                     self.lista_vehiculos[k] = self.lista_vehiculos[k+1]
                     self.lista_vehiculos[k+1] = a
     
-    def realizar_transplante(self, cirujano: Cirujano, receptor, organo: Organo): #Si importo Receptor da un error de circular import
+    def realizar_transplante(self, cirujano: Cirujano, receptor, organo: Organo) -> bool: #Si importo Receptor da un error de circular import
         cirujano.estado = False
         if (cirujano == organo):
             probabilidad  = randint(1, 10)
@@ -68,7 +68,7 @@ class Centro_Salud:
                 return True
             else:
                 print("La cirugía ha fallado")
-                receptor.estado = "Inestable"
+                receptor.estado = "inestable"
                 receptor.calcular_prioridad()
                 return False
 
@@ -80,7 +80,7 @@ class Centro_Salud:
 
             else:
                 print("La cirujía ha fallado")
-                receptor.estado = "Inestable"
+                receptor.estado = "inestable"
                 receptor.calcular_prioridad()
                 return False
 

@@ -89,7 +89,7 @@ class Sistema():
         for i in range(len(self.lista_receptores)):
             if(self.lista_receptores[i].organo_r._tipo == organo._tipo and self.lista_receptores[i]._t_sangre == donante._t_sangre):
                 receptores.append(self.lista_receptores[i])
-        
+    
         if(len(receptores) == 0):
             print("No se encontraron receptores que cualifiquen") #printea si no encuentra match
             return
@@ -112,7 +112,7 @@ class Sistema():
                     donante.lista_organos.remove(organo)
                 else: #si sale mal se pierde el organo y el receptor pasa a estar inestable
                     donante.lista_organos.remove(organo)
-                    receptor_match.estado = "Inestable"
+                    receptor_match.estado = "inestable"
             
 
     def buscar_match_receptor(self, receptor: Receptor):
@@ -120,10 +120,12 @@ class Sistema():
         #los while sirven para que no se vayan de rango la slistas si retiramos un elemento de ellas
 
         i = 0
+        cont = 0 
         while i < (len(self.lista_donantes)):
             k=0
             while k < (len(self.lista_donantes[i].lista_organos)):
                 if(receptor.organo_r._tipo == self.lista_donantes[i].lista_organos[k]._tipo and receptor._t_sangre == self.lista_donantes[i]._t_sangre):
+                    cont += 1
                     try:    
                         if (receptor.centro_salud.chequear_disponibilidad_cirujano() == False):
                             raise DisponibilidadError("No hay cirujanos disponibles para realizar la operación")
@@ -138,14 +140,15 @@ class Sistema():
                             if (receptor.centro_salud.asignar_cirujano(receptor, self.lista_donantes[i].lista_organos[k])): #si sale bien se retira el organo y se retira el receptor de la lista
                                 self.lista_receptores.remove(receptor)
                             else: #si sale mal se pierde el organo y el receptor pasa a estar inestable
-                                receptor.estado = "Inestable"
+                                receptor.estado = "inestable"
                             self.lista_donantes[i].lista_organos.pop(k)
                             if (self.lista_donantes[i].lista_organos): #Si el donante ya no tiene más organos se retira al donante de la lista
                                 self.lista_donantes.pop(i)
 
                 k+=1
             i+= 1
-                
+        if ( cont == 0):
+            print("No se encontraron donantes compatibles")
     def crear_paciente(self, centro_salud: Centro_Salud):
         #se crea un paciente pasando los parametros a mano, luego llama a las respectivas funciones de buscar_match
 
@@ -167,9 +170,16 @@ class Sistema():
             else:
                 flag = True
 
-        str_nacimiento = str(input("Ingrese su fecha de nacimiento  AAAA-MM-DD: "))
+        flag = False
+        while flag == False:
+            str_nacimiento = str(input("Ingrese su fecha de nacimiento  AAAA-MM-DD: "))
+            try:
+                fecha_nacimiento = datetime.strptime(str_nacimiento,"%Y-%m-%d")
+            except ValueError:
+                print("Formato de fecha inválido, ingréselo devuelta")
+            else:
+                flag = True
 
-        fecha_nacimiento = datetime.strptime(str_nacimiento,"%Y-%m-%d")
         flag = False
         while flag == False:
             try:
@@ -216,12 +226,30 @@ class Sistema():
                 flag = True
 
         if (tipo_paciente == "D"):
-            str_fallecimiento = str(input("ingrese la fecha de fallecimiento AAAA-MM-DD: "))
-            dt_fallecimiento = datetime.strptime(str_fallecimiento,"%Y-%m-%d")
+            flag = False
+            while flag == False:
+                str_fallecimiento = str(input("Ingrese la fecha de fallecimiento  AAAA-MM-DD: "))
+                try:
+                    dt_fallecimiento = datetime.strptime(str_fallecimiento,"%Y-%m-%d")
+                except ValueError:
+                    print("Formato de fecha inválido, ingréselo devuelta")
+                else:
+                    flag = True
+            flag = False
+    
             lista_organos = []
             cantidad_organos = int(input("ingrese la cantidad de organos: "))
             for i in range (0,cantidad_organos):
-                tipo = str(input("ingrese el tipo de organo: "))
+                flag = False
+                while flag == False:
+                    try:
+                        tipo = str(input("ingrese el tipo de organo: ")).strip().lower()
+                        if tipo not in ("corazón","pulmón","piel","córnea","hueso","intestino","riñón","hígado", "páncreas"):
+                           raise ValueError("Entrada inválida, órgano no admitido")
+                    except ValueError as e:
+                        print(e)
+                    else: 
+                        flag = True
                 organo_i = Organo(Tipo[tipo])
                 lista_organos.append(organo_i)
             paciente = Donante(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, dt_fallecimiento, lista_organos)
@@ -233,11 +261,39 @@ class Sistema():
 
         else:
             tipo = str(input("ingrese el tipo de organo: "))
+            flag = False
+            while flag == False:
+                try:
+                    tipo = str(input("ingrese el tipo de organo: ")).strip().lower()
+                    if tipo not in ("corazón","pulmón","piel","córnea","hueso","intestino","riñón","hígado", "páncreas"):
+                       raise ValueError("Entrada inválida, órgano no admitido")
+                except ValueError as e:
+                    print(e)
+                else: 
+                    flag = True
             organo_r = Organo(Tipo[tipo])
-            str_espera = str(input("ingrese la fecha de ingreso al sistema del instituto AAAA-MM-DD: "))
-            dt_espera = datetime.strptime(str_espera,"%Y-%m-%d")
+            flag = False
+            while flag == False:
+                str_espera = str(input("Ingrese la fecha de ingreso al sistema  AAAA-MM-DD: "))
+                try:
+                    dt_espera = datetime.strptime(str_espera,"%Y-%m-%d")
+                except ValueError:
+                    print("Formato de fecha inválido, ingréselo devuelta")
+                else:
+                    flag = True
+            flag = False
             patologia = str(input("ingrese su patologia: "))
-            estado = str(input("ingrese su estado: "))
+            while flag == False:
+                try:
+                    estado = str(input("ingrese su estado: "))
+                    if estado not in ("estable", "inestable"):
+                       raise ValueError("Entrada inválida, estado invalido")
+                except ValueError as e:
+                    print(e)
+                else:
+                    flag = True
+            flag = False
+            
             paciente = Receptor(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, organo_r, dt_espera, patologia,estado)
             self.buscar_match_receptor(paciente)
 
