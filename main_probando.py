@@ -21,7 +21,7 @@ fischer = Cirujano(Especialidad(1))
 fernandez = Cirujano(Especialidad(2))
 lopez = Cirujano(Especialidad(3))
 # Centros de Salud
-cs1 = Centro_Salud("Hospital Central", "La Plata", "Buenos Aires", "+54 911 1234-5678", [gomez, fischer], vehiculos1)
+cs1 = Centro_Salud("Hospital Central", "La Plata", "Buenos Aires", "+54 911 1234-5678",[gomez, fischer], vehiculos1)
 cs2 = Centro_Salud("Clínica del Sur", "Avellaneda", "Buenos Aires", "+54 911 8765-4321", [fernandez, lopez], vehiculos2)
 
 # Donantes (10 por centro)
@@ -71,4 +71,4 @@ organo2 = Organo(Tipo(8))
 #Incucai.listar_donantes()
 #Incucai.listar_receptores()
 
-Incucai.crear_paciente(cs1)
+Incucai.buscar_match_receptor(receptores[0])
