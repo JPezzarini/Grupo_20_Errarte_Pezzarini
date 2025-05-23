@@ -9,6 +9,6 @@ class Vehiculo(ABC):
         self.estado = True #True = Desocupado False = Ocupado
 
     @abstractmethod
-    def realizar_transporte(self,distancia: int, nivel_trafico: int, fecha_hablacion_donante : datetime, viaje:str):
+    def realizar_transporte(self,distancia: int, nivel_trafico: int, fecha_ablacion_donante : datetime, viaje:str):
         pass
     

@@ -21,7 +21,7 @@ class Centro_Salud:
 
 
 
-    def asignar_vehiculo(self, centro_receptor, viaje, fecha_hablacion_donante): #falta determinar nivel de trafico y distancia de viaje
+    def asignar_vehiculo(self, centro_receptor, viaje, fecha_ablacion_donante): #falta determinar nivel de trafico y distancia de viaje
         self.ordenar_vehiculo_velocidad()
         if (self.provincia == centro_receptor.provincia and self.partido == centro_receptor.partido):
             for i in range (len(self.lista_vehiculos)):
@@ -29,7 +29,7 @@ class Centro_Salud:
                     if (self.lista_vehiculos[i].estado):
                         distancia = randint(1,25) #en km
                         nivel_trafico = uniform(0,2)
-                        self.lista_vehiculos[i].realizar_transporte(distancia, nivel_trafico, fecha_hablacion_donante, viaje)
+                        self.lista_vehiculos[i].realizar_transporte(distancia, nivel_trafico, fecha_ablacion_donante, viaje)
                         return True
         if (self.provincia == centro_receptor.provincia and self.partido != centro_receptor.partido):
             for i in range (len(self.lista_vehiculos)):
@@ -37,7 +37,7 @@ class Centro_Salud:
                     if (self.lista_vehiculos[i].estado):
                         distancia = randint(25,100) #en km
                         nivel_trafico = 0
-                        self.lista_vehiculos[i].realizar_transporte(distancia, nivel_trafico, fecha_hablacion_donante, viaje)
+                        self.lista_vehiculos[i].realizar_transporte(distancia, nivel_trafico, fecha_ablacion_donante, viaje)
                         return True
         if (self.provincia != centro_receptor.provincia):
             for i in range (len(self.lista_vehiculos)):
@@ -45,7 +45,7 @@ class Centro_Salud:
                     if (self.lista_vehiculos[i].estado):
                         distancia = randint(100,3000) #en km
                         nivel_trafico = 0
-                        self.lista_vehiculos[i].realizar_transporte(distancia, nivel_trafico, fecha_hablacion_donante, viaje)
+                        self.lista_vehiculos[i].realizar_transporte(distancia, nivel_trafico, fecha_ablacion_donante, viaje)
                         return True
         
         print("No se pudo asignar un vehículo adecuado en este momento") #Printea solo si no encontro un vehiculo 
@@ -70,6 +70,7 @@ class Centro_Salud:
                 print("La cirugía ha fallado")
                 receptor.estado = "Inestable"
                 receptor.calcular_prioridad()
+                return False
 
         else:
             probabilidad  = randint(1, 10)
@@ -81,6 +82,7 @@ class Centro_Salud:
                 print("La cirujía ha fallado")
                 receptor.estado = "Inestable"
                 receptor.calcular_prioridad()
+                return False
 
 
     def asignar_cirujano(self, receptor, organo: Organo):

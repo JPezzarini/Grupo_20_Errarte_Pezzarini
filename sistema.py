@@ -98,10 +98,10 @@ class Sistema():
         if (receptor_match.centro_salud.chequear_disponibilidad_cirujano()):
             
             hoy = date.today()
-            donante.lista_organos[k].dt_hablacion = datetime.combine(hoy,time(random.randint(0,23),random.randint(0,59),random.randint(0,59))) # creo una fecha y tiempo de ablacion random
-            fecha_hablacion = donante.lista_organos[k].dt_hablacion #guarda la fecha en una variable para pasarla entre funciones
+            donante.lista_organos[k].dt_ablacion = datetime.combine(hoy,time(random.randint(0,23),random.randint(0,59),random.randint(0,59))) # creo una fecha y tiempo de ablacion random
+            fecha_ablacion = donante.lista_organos[k].dt_ablacion #guarda la fecha en una variable para pasarla entre funciones
             viaje = f"{donante.centro_salud.nombre}-{receptor_match.centro_salud.nombre}" #guarda el viaje para pasarselo al vehiculo
-            donante.centro_salud.asignar_vehiculo(receptor_match.centro_salud,viaje,fecha_hablacion)
+            donante.centro_salud.asignar_vehiculo(receptor_match.centro_salud,viaje,fecha_ablacion)
             
             if (receptor_match.centro_salud.asignar_cirujano(receptor_match, donante.lista_organos[k])): #si sale bien se retira el organo y se retira el receptor de la lista
                 self.lista_receptores.remove(receptor_match)
@@ -126,10 +126,10 @@ class Sistema():
                 if(receptor.organo_r._tipo == self.lista_donantes[i].lista_organos[k]._tipo and receptor._t_sangre == self.lista_donantes[i]._t_sangre):
                     if (receptor.centro_salud.chequear_disponibilidad_cirujano()):
                         hoy = date.today()
-                        self.lista_donantes[i].lista_organos[k].dt_hablacion = datetime.combine(hoy,time(random.randint(0,23),random.randint(0,59),random.randint(0,59))) # creo una fecha y tiempo de ablacion random
-                        fecha_hablacion = self.lista_donantes[i].lista_organos[k].dt_hablacion #guardo la fecha en una variable para pasarla entre funciones
+                        self.lista_donantes[i].lista_organos[k].dt_ablacion = datetime.combine(hoy,time(random.randint(0,23),random.randint(0,59),random.randint(0,59))) # creo una fecha y tiempo de ablacion random
+                        fecha_ablacion = self.lista_donantes[i].lista_organos[k].dt_ablacion #guardo la fecha en una variable para pasarla entre funciones
                         viaje = f"{self.lista_donantes[i].centro_salud.nombre}-{receptor.centro_salud.nombre}" #me guardo el viaje para pasarselo al vehiculo 
-                        if(self.lista_donantes[i].centro_salud.asignar_vehiculo(receptor.centro_salud,viaje,fecha_hablacion)):
+                        if(self.lista_donantes[i].centro_salud.asignar_vehiculo(receptor.centro_salud,viaje,fecha_ablacion)):
 
                             if (receptor.centro_salud.asignar_cirujano(receptor, self.lista_donantes[i].lista_organos[k])): #si sale bien se retira el organo y se retira el receptor de la lista
                                 self.lista_receptores.remove(receptor)
