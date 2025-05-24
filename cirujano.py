@@ -30,15 +30,15 @@ class Cirujano:
     def __eq__(self, organo: Organo):
         if isinstance(organo, Organo):
             
-            if self.especialidad.value == 1 and organo._tipo.value == 1: #Cardiovascular y corazón
+            if self.especialidad.value == 1 and organo.get_tipo().value == 1: #Cardiovascular y corazón
                 return True
-            if self.especialidad.value == 2 and organo._tipo.value == 2: #Pulmonar y pulmón
+            if self.especialidad.value == 2 and organo.get_tipo().value == 2: #Pulmonar y pulmón
                 return True
-            if self.especialidad.value == 3 and (organo._tipo.value == 3 or organo._tipo.value == 4): #Plástico y piel o córnea
+            if self.especialidad.value == 3 and (organo.get_tipo().value == 3 or organo.get_tipo().value == 4): #Plástico y piel o córnea
                 return True
-            if self.especialidad.value == 4 and organo._tipo.value == 5: #Traumatólogo y hueso
+            if self.especialidad.value == 4 and organo.get_tipo().value == 5: #Traumatólogo y hueso
                 return True
-            if self.especialidad.value == 5 and (organo._tipo.value == 6 or organo._tipo.value == 7 or organo._tipo.value == 8 or organo._tipo.value == 9): #Gastroenterologo e intestino, riñón, hígado y páncreas
+            if self.especialidad.value == 5 and (organo._tipo.value == 6 or organo.get_tipo().value == 7 or organo.get_tipo().value == 8 or organo.get_tipo().value == 9): #Gastroenterologo e intestino, riñón, hígado y páncreas
                 return True
         return False
     

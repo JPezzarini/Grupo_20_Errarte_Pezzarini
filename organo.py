@@ -20,3 +20,7 @@ class Organo():
             self._tipo = tipo #Asigno directamente el enum
         self.dt_ablacion = None
 
+    def get_tipo(self):
+        return self._tipo
+    
+    

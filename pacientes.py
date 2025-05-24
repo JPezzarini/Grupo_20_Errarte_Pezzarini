@@ -19,6 +19,28 @@ class Paciente(ABC):
         self._t_sangre = t_sangre
         self.centro_salud = centro_salud
     
+
+    def get_nombre(self):
+        return self._nombre
+    def get_dni(self):
+        return self._dni
+    def get_fecha_nac(self):
+        return self._fecha_nac
+    def get_sexo(self):
+        return self._sexo
+    def get_t_sangre(self):
+        return self._t_sangre
+
+    def set_nombre(self, nombre: str):
+        self._nombre = nombre
+    def set_dni(self, dni: int):
+        self._dni = dni
+    def set_fecha_nac(self, fecha_nac: str):
+        self._fecha_nac = fecha_nac
+    def set_sexo(self, sexo: str):
+        self._sexo = sexo
+    def set_t_sangre(self, t_sangre: str):
+        self._t_sangre = t_sangre
     @abstractmethod
     def __repr__(self):
         pass

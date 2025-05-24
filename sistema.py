@@ -87,7 +87,7 @@ class Sistema():
 
         receptores = []
         for i in range(len(self.lista_receptores)):
-            if(self.lista_receptores[i].organo_r._tipo == organo._tipo and self.lista_receptores[i]._t_sangre == donante._t_sangre):
+            if(self.lista_receptores[i].organo_r.get_tipo() == organo._tipo and self.lista_receptores[i].get_t_sangre() == donante._t_sangre):
                 receptores.append(self.lista_receptores[i])
     
         if(len(receptores) == 0):
@@ -124,7 +124,7 @@ class Sistema():
         while i < (len(self.lista_donantes)):
             k=0
             while k < (len(self.lista_donantes[i].lista_organos)):
-                if(receptor.organo_r._tipo == self.lista_donantes[i].lista_organos[k]._tipo and receptor._t_sangre == self.lista_donantes[i]._t_sangre):
+                if(receptor.organo_r.get_tipo() == self.lista_donantes[i].lista_organos[k].get_tipo() and receptor.get_t_sangre() == self.lista_donantes[i].get_t_sangre()):
                     cont += 1
                     try:    
                         if (receptor.centro_salud.chequear_disponibilidad_cirujano() == False):
@@ -158,10 +158,10 @@ class Sistema():
             try:
                 dni = int(input("Ingrese el DNI del paciente: "))
                 for i in range(len(self.lista_receptores)):
-                    if(self.lista_receptores[i]._dni == dni):
+                    if(self.lista_receptores[i].get_dni() == dni):
                         raise DniError("Entrada inválida, DNI ya registrado")
                 for i in range(len(self.lista_donantes)):
-                    if(self.lista_donantes[i]._dni == dni):
+                    if(self.lista_donantes[i].get_dni() == dni):
                         raise DniError("Entrada inválida, DNI ya registrado")    
             except DniError as e:
                 print(e)
@@ -327,6 +327,6 @@ class Sistema():
     
     def informar_prioridad_receptor(self, dni_receptor) -> None:
         for i in range(len(self.lista_receptores)):
-            if (self.lista_receptores[i]._dni == dni_receptor):
+            if (self.lista_receptores[i].get_dni() == dni_receptor):
                 print(f"En la escala de prioridad, el paciente se encuentra en el nivel {self.lista_receptores[i].prioridad}")
                 
