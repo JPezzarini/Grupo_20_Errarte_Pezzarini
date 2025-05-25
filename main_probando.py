@@ -10,11 +10,10 @@ from avion import Avion
 from helicoptero import Helicoptero
 from cirujano import *
 from organo import *
-
-
+import csv
+import random
 vehiculos1 = [Avion(90), Helicoptero(100), Ambulancia(110), Ambulancia(85), Ambulancia(95)]
 vehiculos2 = [Avion(80), Avion(120), Helicoptero(100), Ambulancia(105), Ambulancia(90)]
-
 #Cirujanos
 gomez = Cirujano(Especialidad(5))
 fischer = Cirujano(Especialidad(1))
@@ -38,7 +37,7 @@ donantes = [
     Donante("Julieta", 41234567, datetime(1994, 11, 18), "F", "+54 911 0000-0000", "O+", cs2, datetime(2025, 4, 7), [Organo(Tipo(8)), Organo(Tipo(1))]),
 ]
 
-# Recepieltores (10 por centro)
+# Receptores (10 por centro)
 receptores = [
     Receptor("Ana", 41321789, datetime(1989, 6, 10), "F", "+54 911 1231-4567", "A+", cs1, Organo(Tipo(1)), datetime(2024, 5, 8), "Insuficiencia cardíaca", "Crítico"),
     Receptor("Diego", 40111222, datetime(1975, 3, 22), "M", "+54 911 2342-5678", "B-", cs1, Organo(Tipo(7)), datetime(2023, 12, 10), "Insuficiencia renal", "Estable"),
@@ -52,23 +51,65 @@ receptores = [
     Receptor("Marcos", 49990000, datetime(1991, 12, 3), "M", "+54 911 0120-3456", "O-", cs2, Organo(Tipo(9)), datetime(2023, 8, 30), "Diabetes", "Estable"),
 ]
 
-Incucai = Sistema([cs1,cs2],receptores, donantes)
-aaa = Receptor("Ana", 41321789, datetime(1989, 6, 10), "F", "+54 911 1231-4567", "A+", cs1, Organo(Tipo(1)), datetime(2024, 5, 8), "Insuficiencia cardíaca", "Estable")
-organo1 = Organo(1)
-organo2 = Organo(Tipo(8))
+# Incucai = Sistema([cs1,cs2],receptores, donantes)
+# aaa = Receptor("Ana", 41321789, datetime(1989, 6, 10), "F", "+54 911 1231-4567", "A+", cs1, Organo(Tipo(1)), datetime(2024, 5, 8), "Insuficiencia cardíaca", "Estable")
+# organo1 = Organo(1)
+# organo2 = Organo(Tipo(8))
 
-#cs1.realizar_transplante(fischer, aaa, organo1)
-#Incucai.recibir_paciente(aaa)
-#Incucai.crear_paciente(cs1)
+# #cs1.realizar_transplante(fischer, aaa, organo1)
+# #Incucai.recibir_paciente(aaa)
+# #Incucai.crear_paciente(cs1)
 
-#fisura = Donante("Roberto", 345550542, datetime(1970, 5, 23), "M", "+54 911 1231-4567", "A+", cs2, datetime(2025, 5, 14), [Organo(Tipo(2))])
-#Incucai.recibir_paciente(fisura)
+# #fisura = Donante("Roberto", 345550542, datetime(1970, 5, 23), "M", "+54 911 1231-4567", "A+", cs2, datetime(2025, 5, 14), [Organo(Tipo(2))])
+# #Incucai.recibir_paciente(fisura)
 
-#string = "2025-05-27"
-#dt = datetime.strptime(string,"%Y-%m-%d")
-#print(dt)
+# #string = "2025-05-27"
+# #dt = datetime.strptime(string,"%Y-%m-%d")
+# #print(dt)
 
-#Incucai.listar_donantes()
-#Incucai.listar_receptores()
+# #Incucai.listar_donantes()
+# #Incucai.listar_receptores()
 
-Incucai.buscar_match_receptor(receptores[0])
+# Incucai.buscar_match_receptor(receptores[0])
+
+def cargar_pacientes_desde_csv(archivo_csv: str):
+    pacientes = []
+    with open(archivo_csv, mode='r', encoding='utf-8') as archivo:
+        lector = csv.DictReader(archivo)
+        for fila in lector:
+
+            paciente = Receptor(
+                nombre=fila['\ufeffnombre'],
+                dni=int(fila['dni']),
+                fecha_nac=datetime.strptime(fila['fecha_nac'], '%Y-%m-%d'),
+                sexo=fila['sexo'],
+                tel=fila['tel'],
+                t_sangre=fila['t_sangre'],
+                centro_salud=fila['centro_salud'],
+                organo_r=fila['organo_r'],
+                dt_espera=datetime.strptime(fila['dt_espera'], '%Y-%m-%d %H:%M:%S'),
+                patologia=fila['patologia'],
+                estado=fila['estado']
+            )
+            pacientes.append(paciente)
+    return pacientes
+pacientes= cargar_pacientes_desde_csv('Archivo_Receptores.csv')
+for paciente in pacientes:
+    print(paciente.get_nombre())
+
+lista_centros=[cs1, cs2]
+def cargar_centros(lista_receptores,lista_centros):
+    for receptor in lista_receptores:
+        receptor.centro_salud=lista_centros[random.randint(0,1)]
+cargar_centros(pacientes, lista_centros)
+for paciente in pacientes:
+    print("\n")
+    print(paciente.centro_salud.nombre)
+
+def cargar_organos(lista_receptores):
+    for receptor in lista_receptores:
+        receptor.organo_r=Organo(tipo=random.randint(1,9))
+cargar_organos(pacientes)
+for paciente in pacientes:
+    print("\n")
+    print(paciente.organo_r.get_tipo())
