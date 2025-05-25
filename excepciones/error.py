@@ -4,3 +4,6 @@ class DniError(Exception):
 
 class DisponibilidadError(Exception):
     pass
+
+class EncontrarpacienteError(Exception):
+    pass

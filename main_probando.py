@@ -39,19 +39,19 @@ donantes = [
 
 # Receptores (10 por centro)
 receptores = [
-    Receptor("Ana", 41321789, datetime(1989, 6, 10), "F", "+54 911 1231-4567", "A+", cs1, Organo(Tipo(1)), datetime(2024, 5, 8), "Insuficiencia cardíaca", "Crítico"),
+    Receptor("Ana", 41321789, datetime(1989, 6, 10), "F", "+54 911 1231-4567", "A+", cs1, Organo(Tipo(1)), datetime(2024, 5, 8), "Insuficiencia cardíaca", "Inestable"),
     Receptor("Diego", 40111222, datetime(1975, 3, 22), "M", "+54 911 2342-5678", "B-", cs1, Organo(Tipo(7)), datetime(2023, 12, 10), "Insuficiencia renal", "Estable"),
-    Receptor("Laura", 42223333, datetime(1990, 9, 18), "F", "+54 911 3453-6789", "O-", cs1, Organo(Tipo(8)), datetime(2024, 1, 15), "Hepatitis", "Urgente"),
+    Receptor("Laura", 42223333, datetime(1990, 9, 18), "F", "+54 911 3453-6789", "O-", cs1, Organo(Tipo(8)), datetime(2024, 1, 15), "Hepatitis", "Estable"),
     Receptor("Federico", 43334444, datetime(1982, 2, 5), "M", "+54 911 4564-7890", "AB+", cs1, Organo(Tipo(2)), datetime(2023, 6, 1), "Fibrosis quística", "Estable"),
-    Receptor("Sabrina", 44445555, datetime(1996, 11, 11), "F", "+54 911 5675-8901", "O+", cs1, Organo(Tipo(9)), datetime(2024, 3, 20), "Diabetes", "Crítico"),
-    Receptor("Nicolás", 45556666, datetime(1988, 8, 29), "M", "+54 911 6786-9012", "A-", cs2, Organo(Tipo(7)), datetime(2023, 11, 5), "Insuficiencia renal", "Urgente"),
+    Receptor("Sabrina", 44445555, datetime(1996, 11, 11), "F", "+54 911 5675-8901", "O+", cs1, Organo(Tipo(9)), datetime(2024, 3, 20), "Diabetes", "Inestable"),
+    Receptor("Nicolás", 45556666, datetime(1988, 8, 29), "M", "+54 911 6786-9012", "A-", cs2, Organo(Tipo(7)), datetime(2023, 11, 5), "Insuficiencia renal", "Estable"),
     Receptor("Florencia", 46667777, datetime(1979, 5, 13), "F", "+54 911 7897-0123", "B+", cs2, Organo(Tipo(8)), datetime(2024, 2, 25), "Hepatitis", "Estable"),
-    Receptor("Joaquín", 47778888, datetime(1984, 10, 6), "M", "+54 911 8908-1234", "AB-", cs2, Organo(Tipo(1)), datetime(2023, 9, 18), "Enfermedad cardíaca", "Crítico"),
-    Receptor("Camila", 48889999, datetime(1993, 7, 1), "F", "+54 911 9019-2345", "A+", cs2, Organo(Tipo(2)), datetime(2024, 4, 10), "Fibrosis quística", "Urgente"),
+    Receptor("Joaquín", 47778888, datetime(1984, 10, 6), "M", "+54 911 8908-1234", "AB-", cs2, Organo(Tipo(1)), datetime(2023, 9, 18), "Enfermedad cardíaca", "Estable"),
+    Receptor("Camila", 48889999, datetime(1993, 7, 1), "F", "+54 911 9019-2345", "A+", cs2, Organo(Tipo(2)), datetime(2024, 4, 10), "Fibrosis quística", "Estable"),
     Receptor("Marcos", 49990000, datetime(1991, 12, 3), "M", "+54 911 0120-3456", "O-", cs2, Organo(Tipo(9)), datetime(2023, 8, 30), "Diabetes", "Estable"),
 ]
 
-# Incucai = Sistema([cs1,cs2],receptores, donantes)
+Incucai = Sistema([cs1,cs2],receptores, donantes)
 # aaa = Receptor("Ana", 41321789, datetime(1989, 6, 10), "F", "+54 911 1231-4567", "A+", cs1, Organo(Tipo(1)), datetime(2024, 5, 8), "Insuficiencia cardíaca", "Estable")
 # organo1 = Organo(1)
 # organo2 = Organo(Tipo(8))
@@ -113,3 +113,5 @@ cargar_organos(pacientes)
 for paciente in pacientes:
     print("\n")
     print(paciente.organo_r.get_tipo())
+
+Incucai.informar_prioridad_receptor(40111222)

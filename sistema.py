@@ -324,9 +324,18 @@ class Sistema():
         for i in range(len(self.lista_receptores)):
             if (self.lista_receptores[i].centro_salud == centro_de_salud):
                 print(self.lista_receptores[i].__repr__())
+        
+        
     
     def informar_prioridad_receptor(self, dni_receptor) -> None:
-        for i in range(len(self.lista_receptores)):
-            if (self.lista_receptores[i].get_dni() == dni_receptor):
-                print(f"En la escala de prioridad, el paciente se encuentra en el nivel {self.lista_receptores[i].prioridad}")
+        try:
+            cont = 0
+            for i in range(len(self.lista_receptores)):
+                if (self.lista_receptores[i].get_dni() == dni_receptor):
+                    print(f"En la escala de prioridad, el paciente se encuentra en el nivel {self.lista_receptores[i].prioridad}")
+                    return
+            if cont == 0:
+                raise DisponibilidadError("No se encontró al paciente.")
+        except DisponibilidadError as e:
+            print(e)
                 
