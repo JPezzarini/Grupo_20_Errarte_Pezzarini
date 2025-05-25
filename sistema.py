@@ -2,19 +2,19 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 from abc import ABC, abstractmethod
 from datetime import *
-from donantes import Donante
-from receptores import Receptor
-from vehiculo import Vehiculo
+from personas.donantes import Donante
+from personas.receptores import Receptor
+from vehiculos.vehiculo import Vehiculo
 import random
 from organo import *
 from excepciones.error import *
 if TYPE_CHECKING:
-    from pacientes import Paciente
+    from personas.pacientes import Paciente
     from centro_de_salud import Centro_Salud
-    from ambulancia import Ambulancia
-    from avion import Avion
-    from helicoptero import Helicoptero
-    from cirujano import Cirujano
+    from vehiculos.ambulancia import Ambulancia
+    from vehiculos.avion import Avion
+    from vehiculos.helicoptero import Helicoptero
+    from personas.cirujano import Cirujano
 
 class Sistema():
 

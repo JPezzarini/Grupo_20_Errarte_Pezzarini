@@ -1,4 +1,4 @@
-from vehiculo import Vehiculo
+from vehiculos.vehiculo import Vehiculo
 from datetime import *
 class Helicoptero(Vehiculo):
 

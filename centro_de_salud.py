@@ -1,9 +1,9 @@
-from avion import Avion
-from helicoptero import Helicoptero
-from ambulancia import Ambulancia
+from vehiculos.avion import Avion
+from vehiculos.helicoptero import Helicoptero
+from vehiculos.ambulancia import Ambulancia
 from random import *
 from organo import *
-from cirujano import *
+from personas.cirujano import *
 from datetime import *
 
 

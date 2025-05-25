@@ -1,4 +1,4 @@
-from pacientes import Paciente
+from personas.pacientes import Paciente
 from datetime import *
 from organo import Organo
 from centro_de_salud import Centro_Salud

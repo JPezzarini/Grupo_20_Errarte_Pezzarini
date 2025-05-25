@@ -1,14 +1,14 @@
-from pacientes import Paciente
+from personas.pacientes import Paciente
 from centro_de_salud import Centro_Salud
 from sistema import Sistema
-from donantes import *
-from receptores import Receptor
+from personas.donantes import *
+from personas.receptores import Receptor
 from organo import Organo
-from vehiculo import Vehiculo
-from ambulancia import Ambulancia
-from avion import Avion
-from helicoptero import Helicoptero
-from cirujano import *
+from vehiculos.vehiculo import Vehiculo
+from vehiculos.ambulancia import Ambulancia
+from vehiculos.avion import Avion
+from vehiculos.helicoptero import Helicoptero
+from personas.cirujano import *
 from organo import *
 import csv
 import random
