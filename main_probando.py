@@ -53,13 +53,6 @@ receptores = [
 
 Incucai = Sistema([cs1,cs2],receptores, donantes)
 def mostrar_menu():
-    #Crear paciente
-    #Crear cirujano
-    #Lista de donantes
-    #Lista de receptores
-    #Buscar receptores por centro de salud
-    #Informar prioridad de receptor
-    print("Seleccione una opción:")
     print("1. Crear un paciente")
     print("2. Crear un cirujano")
     print("3. Imprimir lista de donantes")
@@ -160,7 +153,7 @@ def opcion_7():
 def main():
     while True:
         mostrar_menu()
-        seleccion = input("Ingrese su opción: ")
+        seleccion = input("Ingrese una opción: ")
         if seleccion == '1':
             opcion_1()
         elif seleccion == '2':
