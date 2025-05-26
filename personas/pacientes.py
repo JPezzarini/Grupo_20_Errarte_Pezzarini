@@ -70,19 +70,45 @@ class Paciente(ABC):
         """
         Establece el nombre del paciente.
         params:
-            - nombre (str): El nuevo nombre del paciente.
+            - nombre: El nuevo nombre del paciente.
         """
         self._nombre = nombre
     def set_dni(self, dni: int) -> None:
+        """
+        Establece el DNI del paciente.
+        params:
+            - dni: El nuevo DNI del paciente.
+        """
         self._dni = dni
     def set_fecha_nac(self, fecha_nac: str) -> None:
+        """
+        Establece la fecha de nacimiento del paciente.
+        params:
+            - fecha_nac: La nueva fecha de nacimiento del paciente.
+        """
         self._fecha_nac = fecha_nac
     def set_sexo(self, sexo: str) -> None:
+        """
+        Establece el sexo del paciente.
+        params:
+            - sexo: El nuevo sexo del paciente.
+        """
         self._sexo = sexo
     def set_t_sangre(self, t_sangre: str) -> None:
+        """
+        Establece el tipo de sangre del paciente.
+        params:
+            - t_sangre: El nuevo tipo de sangre del paciente.
+        """
         self._t_sangre = t_sangre
+
     @abstractmethod
     def __repr__(self):
+        """
+        Método abstracto que crea una representación en cadena de un objeto.  
+        returns:
+            Un str con los datos del paciente. 
+        """
         pass
     
 
