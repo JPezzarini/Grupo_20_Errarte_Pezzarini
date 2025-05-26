@@ -8,7 +8,7 @@ class Ambulancia(Vehiculo):
 
 
     def realizar_transporte(self,distancia: int, nivel_trafico: int, fecha_ablacion_donante : datetime, viaje:str):
-        tiempo = (distancia/self.velocidad) + nivel_trafico #se toma el tiempo como horas
+        tiempo = nivel_trafico + (distancia.__floordiv__(self.velocidad)) #se toma el tiempo como horas
         tiempo_final = fecha_ablacion_donante + timedelta(hours = tiempo) #sumo el tiempo de transporte a la fecha de ablacion del organo
         self.registro_viajes.append(viaje)
         if datetime.today() < tiempo_final:
