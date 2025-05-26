@@ -332,12 +332,15 @@ class Sistema():
             print(self.lista_donantes[i].__repr__())
                 
 
-    def buscar_receptores_centro_salud(self, centro_de_salud: Centro_Salud):
+    def buscar_receptores_centro_salud(self, centro_de_salud: str) -> None:
         for i in range(len(self.lista_receptores)):
-            if (self.lista_receptores[i].centro_salud == centro_de_salud):
+            if (self.lista_receptores[i].centro_salud.nombre == centro_de_salud):
                 print(self.lista_receptores[i].__repr__())
-        
-        
+
+    def buscar_donantes_centro_salud(self, centro_de_salud:str) -> None:
+        for i in range(len(self.lista_donantes)):
+            if (self.lista_donantes[i].centro_salud.nombre == centro_de_salud):
+                print(self.lista_donantes[i].__repr__())
     
     def informar_prioridad_receptor(self, dni_receptor) -> None:
         try:

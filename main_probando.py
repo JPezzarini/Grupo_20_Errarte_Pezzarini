@@ -52,66 +52,175 @@ receptores = [
 ]
 
 Incucai = Sistema([cs1,cs2],receptores, donantes)
-# aaa = Receptor("Ana", 41321789, datetime(1989, 6, 10), "F", "+54 911 1231-4567", "A+", cs1, Organo(Tipo(1)), datetime(2024, 5, 8), "Insuficiencia cardíaca", "Estable")
-# organo1 = Organo(1)
-# organo2 = Organo(Tipo(8))
+def mostrar_menu():
+    #Crear paciente
+    #Crear cirujano
+    #Lista de donantes
+    #Lista de receptores
+    #Buscar receptores por centro de salud
+    #Informar prioridad de receptor
+    print("Seleccione una opción:")
+    print("1. Crear un paciente")
+    print("2. Crear un cirujano")
+    print("3. Imprimir lista de donantes")
+    print("4. Imprimir lista de receptores")
+    print("5. Imprimir receptores de un centro de salud específico")
+    print("6. Imprimir donantes de un centro de salud específico")
+    print("7. Informar prioridad de un receptor")
+    print("8. Salir")
+def opcion_1():
+    flag = False
+    while flag == False:
+        try:
+            centro_de_salud = str(input("Ingrese el nombre del centro de salud del paciente: "))
+            cont = 0
+            for i in range(len(Incucai.lista_centros)):
+                if (centro_de_salud == Incucai.lista_centros[i].nombre):
+                    Incucai.crear_paciente(Incucai.lista_centros[i])
+                    cont+=1
+            if (cont == 0):
+                raise ValueError("Ingreso inválido. No se encontró el centro de salud")
+        except ValueError as e:
+            print(e)
+        else:
+            flag = True
 
-# #cs1.realizar_transplante(fischer, aaa, organo1)
-# #Incucai.recibir_paciente(aaa)
-# #Incucai.crear_paciente(cs1)
+def opcion_2():
+    flag = False
+    while flag == False:
+        try:
+            centro_de_salud = str(input("Ingrese el nombre del centro de salud del cirujano: "))
+            cont = 0
+            for i in range(len(Incucai.lista_centros)):
+                if (centro_de_salud == Incucai.lista_centros[i].nombre):
+                    Incucai.crear_cirujano(Incucai.lista_centros[i])
+                    cont+=1
+            if (cont == 0):
+                raise ValueError("Ingreso inválido. No se encontró el centro de salud")
+        except ValueError as e:
+            print(e)
+        else:
+            flag = True
 
-# #fisura = Donante("Roberto", 345550542, datetime(1970, 5, 23), "M", "+54 911 1231-4567", "A+", cs2, datetime(2025, 5, 14), [Organo(Tipo(2))])
-# #Incucai.recibir_paciente(fisura)
+def opcion_3():
+    Incucai.listar_donantes()
 
-# #string = "2025-05-27"
-# #dt = datetime.strptime(string,"%Y-%m-%d")
-# #print(dt)
+def opcion_4():
+    Incucai.listar_receptores()
 
-# #Incucai.listar_donantes()
-# #Incucai.listar_receptores()
+def opcion_5():
+    flag = False
+    while flag == False:
+        try:
+            centro_de_salud = str(input("Ingrese el nombre del centro de salud: "))
+            cont = 0
+            for i in range(len(Incucai.lista_centros)):
+                if (centro_de_salud == Incucai.lista_centros[i].nombre):
+                    cont+=1
+            if (cont == 0):
+                raise ValueError("Ingreso inválido. No se encontró el centro de salud")
+        except ValueError as e:
+            print(e)
+        else:
+            Incucai.buscar_receptores_centro_salud(centro_de_salud)
+            flag = True
 
-# Incucai.buscar_match_receptor(receptores[0])
-
-def cargar_pacientes_desde_csv(archivo_csv: str):
-    pacientes = []
-    with open(archivo_csv, mode='r', encoding='utf-8') as archivo:
-        lector = csv.DictReader(archivo)
-        for fila in lector:
-
-            paciente = Receptor(
-                nombre=fila['\ufeffnombre'],
-                dni=int(fila['dni']),
-                fecha_nac=datetime.strptime(fila['fecha_nac'], '%Y-%m-%d'),
-                sexo=fila['sexo'],
-                tel=fila['tel'],
-                t_sangre=fila['t_sangre'],
-                centro_salud=fila['centro_salud'],
-                organo_r=fila['organo_r'],
-                dt_espera=datetime.strptime(fila['dt_espera'], '%Y-%m-%d %H:%M:%S'),
-                patologia=fila['patologia'],
-                estado=fila['estado']
-            )
-            pacientes.append(paciente)
-    return pacientes
-pacientes= cargar_pacientes_desde_csv('Archivo_Receptores.csv')
-for paciente in pacientes:
-    print(paciente.get_nombre())
-
-lista_centros=[cs1, cs2]
-def cargar_centros(lista_receptores,lista_centros):
-    for receptor in lista_receptores:
-        receptor.centro_salud=lista_centros[random.randint(0,1)]
-cargar_centros(pacientes, lista_centros)
-for paciente in pacientes:
-    print("\n")
-    print(paciente.centro_salud.nombre)
-
-def cargar_organos(lista_receptores):
-    for receptor in lista_receptores:
-        receptor.organo_r=Organo(tipo=random.randint(1,9))
-cargar_organos(pacientes)
-for paciente in pacientes:
-    print("\n")
-    print(paciente.organo_r.get_tipo())
-
-Incucai.informar_prioridad_receptor(40111222)
+def opcion_6():
+    flag = False
+    while flag == False:
+        try:
+            centro_de_salud = str(input("Ingrese el nombre del centro de salud: "))
+            cont = 0
+            for i in range(len(Incucai.lista_centros)):
+                if (centro_de_salud == Incucai.lista_centros[i].nombre):
+                    cont+=1
+            if (cont == 0):
+                raise ValueError("Ingreso inválido. No se encontró el centro de salud")
+        except ValueError as e:
+            print(e)
+        else:
+            Incucai.buscar_donantes_centro_salud(centro_de_salud)
+            flag = True
+def opcion_7():
+    flag = False
+    while flag == False:
+        try:
+            dni = int(input("Ingrese el DNI del receptor para saber su prioridad: "))
+            cont = 0
+            for i in range(len(Incucai.lista_receptores)):
+                if (Incucai.lista_receptores[i].get_dni() == dni):
+                    cont+= 1
+            if (cont==0):
+                raise ValueError("Ingreso inválido. No se encontró el DNI")
+        except ValueError as e:
+            print(e)
+        else:
+            Incucai.informar_prioridad_receptor(dni)
+def main():
+    while True:
+        mostrar_menu()
+        seleccion = input("Ingrese su opción: ")
+        if seleccion == '1':
+            opcion_1()
+        elif seleccion == '2':
+            opcion_2()
+        elif seleccion == '3':
+            opcion_3()
+        elif seleccion == '4':
+            opcion_4()
+        elif seleccion == '5':
+            opcion_5()
+        elif seleccion == '6':
+            opcion_6()
+        elif seleccion == '7':
+            opcion_7()
+        elif seleccion == '8':
+            print("Gracias por utilizar el programa.")
+            break
+        else:
+            print("Opción inválida. Ingrese un número permitido.")
+if __name__ == "__main__":
+    main()
+#def cargar_pacientes_desde_csv(archivo_csv: str):
+#    pacientes = []
+#    with open(archivo_csv, mode='r', encoding='utf-8') as archivo:
+#        lector = csv.DictReader(archivo)
+#        for fila in lector:
+#
+#            paciente = Receptor(
+#                nombre=fila['\ufeffnombre'],
+#                dni=int(fila['dni']),
+#                fecha_nac=datetime.strptime(fila['fecha_nac'], '%Y-%m-%d'),
+#                sexo=fila['sexo'],
+#                tel=fila['tel'],
+#                t_sangre=fila['t_sangre'],
+#                centro_salud=fila['centro_salud'],
+#                organo_r=fila['organo_r'],
+#                dt_espera=datetime.strptime(fila['dt_espera'], '%Y-%m-%d %H:%M:%S'),
+#                patologia=fila['patologia'],
+#                estado=fila['estado']
+#            )
+#            pacientes.append(paciente)
+#    return pacientes
+#pacientes= cargar_pacientes_desde_csv('Archivo_Receptores.csv')
+#for paciente in pacientes:
+#    print(paciente.get_nombre())
+#
+#lista_centros=[cs1, cs2]
+#def cargar_centros(lista_receptores,lista_centros):
+#    for receptor in lista_receptores:
+#        receptor.centro_salud=lista_centros[random.randint(0,1)]
+#cargar_centros(pacientes, lista_centros)
+#for paciente in pacientes:
+#    print("\n")
+#    print(paciente.centro_salud.nombre)
+#
+#def cargar_organos(lista_receptores):
+#    for receptor in lista_receptores:
+#        receptor.organo_r=Organo(tipo=random.randint(1,9))
+#cargar_organos(pacientes)
+#for paciente in pacientes:
+#    print("\n")
+#    print(paciente.organo_r.get_tipo())
+#
+#Incucai.informar_prioridad_receptor(40111222)
