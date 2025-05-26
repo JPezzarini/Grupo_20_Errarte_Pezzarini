@@ -156,6 +156,7 @@ def opcion_7():
             print(e)
         else:
             Incucai.informar_prioridad_receptor(dni)
+            flag = True
 def main():
     while True:
         mostrar_menu()
