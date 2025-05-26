@@ -5,13 +5,22 @@ from datetime import *
 class Helicoptero(Vehiculo):
     """
     Esta clase representa a una ambulancia. Hereda atributos de la clase Vehiculo.
-    Aclaración: la función realizar_transporte ya fue comentada en la clase Vehiculo.
     """
     def __init__(self, velocidad):
         super().__init__(velocidad)
 
 
     def realizar_transporte(self,distancia: int, nivel_trafico: int, fecha_ablacion_donante : datetime, viaje:str) -> datetime:
+        """
+        Método abstracto para realizar el transporte de órganos.
+        Args:
+            distancia (int): La distancia a recorrer en kilómetros.
+            nivel_trafico (int): El nivel de tráfico.
+            fecha_ablacion_donante (datetime): La fecha de ablación del órgano del donante.
+            viaje (str): Inicio y destino del viaje.
+        Returns:
+            datetime: La suma de la fecha de ablación del órgano y el tiempo de transporte
+        """
         tiempo = nivel_trafico + (distancia.__floordiv__(self.velocidad))
         tiempo_final = fecha_ablacion_donante + timedelta(hours = tiempo)
         self.registro_viajes.append(viaje)

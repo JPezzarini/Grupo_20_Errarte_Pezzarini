@@ -33,6 +33,10 @@ class Organo():
         self.dt_ablacion = None
 
     def get_tipo(self):
+        """
+        returns: 
+            Retorna el tipo de órgano como un valor del enum Tipo
+        """
         return self._tipo
     
     

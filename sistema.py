@@ -87,7 +87,7 @@ class Sistema():
 
         receptores = []
         for i in range(len(self.lista_receptores)):
-            if(self.lista_receptores[i].organo_r.get_tipo() == organo._tipo and self.lista_receptores[i].get_t_sangre() == donante._t_sangre):
+            if(self.lista_receptores[i].organo_r.get_tipo() == organo.get_tipo() and self.lista_receptores[i].get_t_sangre() == donante.get_t_sangre()):
                 receptores.append(self.lista_receptores[i])
     
         if(len(receptores) == 0):
@@ -117,7 +117,7 @@ class Sistema():
 
     def buscar_match_receptor(self, receptor: Receptor):
         #busca al primer donante compatible segun el receptor pasado como parametro
-        #los while sirven para que no se vayan de rango la slistas si retiramos un elemento de ellas
+        #los while sirven para que no se vayan de rango las listas si retiramos un elemento de ellas
 
         i = 0
         cont = 0 
@@ -144,7 +144,7 @@ class Sistema():
                             self.lista_donantes[i].lista_organos.pop(k)
                             if (self.lista_donantes[i].lista_organos): #Si el donante ya no tiene más organos se retira al donante de la lista
                                 self.lista_donantes.pop(i)
-
+                            return
                 k+=1
             i+= 1
         if ( cont == 0):
@@ -253,11 +253,6 @@ class Sistema():
                 organo_i = Organo(Tipo[tipo])
                 lista_organos.append(organo_i)
             paciente = Donante(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, dt_fallecimiento, lista_organos)
-            i=0
-            while i < (len(paciente.lista_organos)):
-                k = i
-                self.buscar_match_donante(paciente, paciente.lista_organos[i],k)
-                i+=1
 
         else:
             tipo = str(input("ingrese el tipo de organo: "))
@@ -295,7 +290,8 @@ class Sistema():
             flag = False
             
             paciente = Receptor(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, organo_r, dt_espera, patologia,estado)
-            self.buscar_match_receptor(paciente)
+
+        self.recibir_paciente(paciente)
 
 
 
