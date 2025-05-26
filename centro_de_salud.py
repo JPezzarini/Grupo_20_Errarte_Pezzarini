@@ -10,17 +10,19 @@ from datetime import *
 class Centro_Salud:
     """
     Esta clase representa un centro de salud que gestiona cirujanos y vehículos para realizar trasplantes.
-    Atributos:
-        nombre (str): El nombre del centro de salud.
-        partido (str): El partido donde se ubica el centro de salud.
-        provincia (str): La provincia donde se ubica el centro de salud.
-        telefono (str): El número de teléfono del centro de salud.
-        lista_cirujanos (list): Lista de cirujanos disponibles en el centro de salud.
-        lista_vehiculos (list): Lista de vehículos disponibles para el transporte.
     """
 
     def __init__(self, nombre: str, partido: str, provincia: str, tel: str, cirujanos: list, vehiculos: list):
-
+        """
+        Inicializa un centro de salud.
+        Atributos:
+            - nombre (str): El nombre del centro de salud.
+            - partido (str): El partido donde se ubica el centro de salud.
+            - provincia (str): La provincia donde se ubica el centro de salud.
+            - telefono (str): El número de teléfono del centro de salud.
+            - lista_cirujanos (list): Lista de cirujanos disponibles en el centro de salud.
+            - lista_vehiculos (list): Lista de vehículos disponibles para el transporte.
+        """
         self.nombre = nombre
         self.partido = partido
         self.provincia = provincia
@@ -39,7 +41,7 @@ class Centro_Salud:
             - viaje: Información sobre el viaje que se va a realizar.
             - fecha_ablacion_donante: La fecha de ablación del órgano del donante.
         returns:
-            True si se logró asignar un vehículo correctamente, False en caso contrario.
+            Retorna un booleano. True si se logró asignar un vehículo correctamente, False en caso contrario.
         """        
         self.ordenar_vehiculo_velocidad()
         if (self.provincia == centro_receptor.provincia and self.partido == centro_receptor.partido):
@@ -87,10 +89,10 @@ class Centro_Salud:
         El transplante es realizado por el cirujano asignado previamente.
         params:
             - cirujano: El cirujano que realizará el trasplante.
-            - receptor: El receptor del órgano trasplantado.
+            - receptor (Receptor): El receptor del órgano trasplantado.
             - organo: El órgano que se va a trasplantar.
         returns:
-            True si la operación fue exitosa, False en caso contrario.
+            Retorna un booleano. True si la operación fue exitosa, False en caso contrario.
         """
         cirujano.estado = False
         if (cirujano == organo):
@@ -117,15 +119,15 @@ class Centro_Salud:
                 return False
 
 
-    def asignar_cirujano(self, receptor, organo: Organo):
+    def asignar_cirujano(self, receptor, organo: Organo) -> bool:
         """
         Asigna un cirujano disponible para realizar un trasplante.
         Llama a la función realizar_transplante.
         params:
-            - receptor: El receptor del órgano trasplantado.
+            - receptor (Receptor): El receptor del órgano trasplantado.
             - organo: El órgano que se va a trasplantar.
         returns:
-            Retorna el valor de la función realizar_transplante.
+            Retorna el valor de la función realizar_transplante (bool).
         """
         fecha_transplante = datetime.today()
         for i in range (len(self.lista_cirujanos)):
@@ -147,7 +149,7 @@ class Centro_Salud:
         """
         Verifica si hay cirujanos disponibles en el centro de salud.
         returns:
-            True si hay al menos un cirujano disponible, False en caso contrario.
+            Retorna un booleano. True si hay al menos un cirujano disponible, False en caso contrario.
         """
         cont = 0
         for i in range (len(self.lista_cirujanos)):

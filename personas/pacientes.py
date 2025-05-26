@@ -5,11 +5,21 @@ from centro_de_salud import Centro_Salud
 
 
 class Paciente(ABC):
+    """
+    Esta clase abstracta representa un paciente, que puede ser un Donante o un Receptor. 
+    """
 
-
-    def __init__(self, nombre: str, dni: int, fecha_nac: str, sexo: str, tel: str, t_sangre: str, centro_salud: Centro_Salud):
+    def __init__(self, nombre: str, dni: int, fecha_nac: datetime, sexo: str, tel: str, t_sangre: str, centro_salud: Centro_Salud):
         """
-        IMPORTANTE: hacer una funcion para pedir datos, y adentro de ahi
+        Inicializa un paciente.
+        Atributos:
+            - nombre (str): El nombre del paciente.
+            - dni (int): El DNI del paciente.
+            - fecha_nac (str): La fecha de nacimiento del paciente.
+            - sexo (str): El sexo del paciente (M/F).
+            - tel (str): El número de teléfono del paciente.
+            - t_sangre (str): El tipo de sangre del paciente.
+            - centro_salud (Centro_Salud): El centro de salud al que está asociado el paciente.
         """
         self._nombre = nombre
         self._dni = dni
@@ -20,26 +30,56 @@ class Paciente(ABC):
         self.centro_salud = centro_salud
     
 
-    def get_nombre(self):
+    def get_nombre(self) -> str:
+        """
+        Retorna el nombre del paciente.
+        returns:
+            Un str que indica el nombre del paciente.
+        """
         return self._nombre
-    def get_dni(self):
+    def get_dni(self) -> int:
+        """
+        Retorna el DNI del paciente.
+        returns:
+            Un int que indica el DNI del paciente.
+        """
         return self._dni
-    def get_fecha_nac(self):
+    def get_fecha_nac(self) -> datetime:
+        """
+        Retorna la fecha de nacimiento del paciente.
+        returns:
+            Un objeto datetime que indica la fecha de nacimiento del paciente.
+        """
         return self._fecha_nac
-    def get_sexo(self):
+    def get_sexo(self) -> str:
+        """
+        Retorna el sexo del paciente.
+        returns:
+            Un str que indica el sexo del paciente.
+        """
         return self._sexo
-    def get_t_sangre(self):
+    def get_t_sangre(self) -> str:
+        """
+        Retorna el tipo de sangre del paciente.
+        returns:
+            Un str que indica el tipo de sangre del paciente.
+        """
         return self._t_sangre
 
-    def set_nombre(self, nombre: str):
+    def set_nombre(self, nombre: str) -> None:
+        """
+        Establece el nombre del paciente.
+        params:
+            - nombre (str): El nuevo nombre del paciente.
+        """
         self._nombre = nombre
-    def set_dni(self, dni: int):
+    def set_dni(self, dni: int) -> None:
         self._dni = dni
-    def set_fecha_nac(self, fecha_nac: str):
+    def set_fecha_nac(self, fecha_nac: str) -> None:
         self._fecha_nac = fecha_nac
-    def set_sexo(self, sexo: str):
+    def set_sexo(self, sexo: str) -> None:
         self._sexo = sexo
-    def set_t_sangre(self, t_sangre: str):
+    def set_t_sangre(self, t_sangre: str) -> None:
         self._t_sangre = t_sangre
     @abstractmethod
     def __repr__(self):
