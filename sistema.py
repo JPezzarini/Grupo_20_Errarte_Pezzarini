@@ -8,13 +8,14 @@ from vehiculos.vehiculo import Vehiculo
 import random
 from organo import *
 from excepciones.error import *
+from personas.cirujano import *
 if TYPE_CHECKING:
     from personas.pacientes import Paciente
     from centro_de_salud import Centro_Salud
     from vehiculos.ambulancia import Ambulancia
     from vehiculos.avion import Avion
     from vehiculos.helicoptero import Helicoptero
-    from personas.cirujano import Cirujano
+    
 
 class Sistema():
 
@@ -149,6 +150,8 @@ class Sistema():
             i+= 1
         if ( cont == 0):
             print("No se encontraron donantes compatibles")
+
+
     def crear_paciente(self, centro_salud: Centro_Salud):
         #se crea un paciente pasando los parametros a mano, luego llama a las respectivas funciones de buscar_match
 
@@ -288,10 +291,23 @@ class Sistema():
                 else:
                     flag = True
             flag = False
-            
             paciente = Receptor(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, organo_r, dt_espera, patologia,estado)
 
         self.recibir_paciente(paciente)
+
+    def crear_cirujano(self, centro_salud: Centro_Salud):
+        flag = False
+        while flag == False:
+            try:
+                especialidad = str(input("ingrese su especialidad: "))
+                if especialidad not in ("general","cardiovascular","pulmonar","plastico","traumatologo","gastroenterologo"):
+                    raise ValueError("Entrada inválida, especialidad no admitida")
+            except ValueError as e:
+                print(e)
+            else:
+                flag = True
+        cirujano = Cirujano(Especialidad[especialidad])
+        centro_salud.lista_cirujanos.append(cirujano)
 
 
 
