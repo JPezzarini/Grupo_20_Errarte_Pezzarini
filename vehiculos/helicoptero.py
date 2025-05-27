@@ -4,7 +4,7 @@ from datetime import *
 
 class Helicoptero(Vehiculo):
     """
-    Esta clase representa a una ambulancia. Hereda atributos de la clase Vehiculo.
+    Esta clase representa a una helicóptero. Hereda atributos de la clase Vehiculo.
     """
     def __init__(self, velocidad):
         """

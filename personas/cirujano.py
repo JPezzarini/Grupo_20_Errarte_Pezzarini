@@ -38,7 +38,7 @@ class Cirujano:
                 return True
             if self.especialidad.value == 4 and organo.get_tipo().value == 5: #Traumatólogo y hueso
                 return True
-            if self.especialidad.value == 5 and (organo._tipo.value == 6 or organo.get_tipo().value == 7 or organo.get_tipo().value == 8 or organo.get_tipo().value == 9): #Gastroenterologo e intestino, riñón, hígado y páncreas
+            if self.especialidad.value == 5 and (organo.get_tipo().value == 6 or organo.get_tipo().value == 7 or organo.get_tipo().value == 8 or organo.get_tipo().value == 9): #Gastroenterologo e intestino, riñón, hígado y páncreas
                 return True
         return False
     
