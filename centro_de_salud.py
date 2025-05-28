@@ -85,7 +85,7 @@ class Centro_Salud:
     
     def realizar_transplante(self, cirujano: Cirujano, receptor, organo: Organo) -> bool:
         """
-        Realiza un trasplante el transplante del órgano del donante al receptor.
+        Realiza el transplante del órgano del donante al receptor.
         El transplante es realizado por el cirujano asignado previamente.
         params:
             - cirujano: El cirujano que realizará el trasplante.

@@ -15,7 +15,7 @@ class Paciente(ABC):
         Atributos:
             - nombre (str): El nombre del paciente.
             - dni (int): El DNI del paciente.
-            - fecha_nac (str): La fecha de nacimiento del paciente.
+            - fecha_nac (datetime): La fecha de nacimiento del paciente.
             - sexo (str): El sexo del paciente (M/F).
             - tel (str): El número de teléfono del paciente.
             - t_sangre (str): El tipo de sangre del paciente.
@@ -80,7 +80,7 @@ class Paciente(ABC):
             - dni: El nuevo DNI del paciente.
         """
         self._dni = dni
-    def set_fecha_nac(self, fecha_nac: str) -> None:
+    def set_fecha_nac(self, fecha_nac: datetime) -> None:
         """
         Establece la fecha de nacimiento del paciente.
         params:
