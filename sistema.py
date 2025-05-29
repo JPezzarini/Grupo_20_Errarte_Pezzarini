@@ -366,7 +366,7 @@ class Sistema():
                     flag = True
             flag = False
             paciente = Receptor(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, organo_r, dt_espera, patologia,estado)
-
+        print("El paciente fue creado con éxito. Se lo recibirá y se buscarán las compatibilidades de todos los pacientes del sistema")
         self.recibir_paciente(paciente)
 
     def crear_cirujano(self, centro_salud: Centro_Salud) -> None:
@@ -383,7 +383,7 @@ class Sistema():
         flag = False
         while flag == False:
             try:
-                especialidad = str(input("ingrese su especialidad: "))
+                especialidad = str(input("Ingrese su especialidad: "))
                 if especialidad not in ("general","cardiovascular","pulmonar","plastico","traumatologo","gastroenterologo"):
                     raise ValueError("Entrada inválida, especialidad no admitida")
             except ValueError as e:
@@ -392,6 +392,7 @@ class Sistema():
                 flag = True
         cirujano = Cirujano(Especialidad[especialidad])
         centro_salud.lista_cirujanos.append(cirujano)
+        print("El cirujano fue creado con éxito")
 
 
     def listar_receptores(self) -> None:
