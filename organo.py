@@ -4,10 +4,11 @@ from enum import Enum
 class Tipo(Enum):
     """
     Esta clase enum representa los diferentes tipos de órganos disponibles para trasplante.
+
     params:
         Los atributos de la clase son los distintos órganos. A cada tipo se le asigna un int distinto.
     """
-
+    
     corazón = 1
     pulmón = 2
     piel = 3
@@ -26,8 +27,7 @@ class Organo():
         """
         Inicializa un órgano.
         Atributos:
-            - _tipo (Tipo): El tipo de órgano, representado como un valor del enum Tipo.
-                          También puede inicializarse con un valor int. 
+            - _tipo (Tipo): El tipo de órgano, representado como un valor del enum Tipo. También puede inicializarse con un valor int. 
             - dt_ablacion (datetime): La fecha y hora de ablación del órgano.
         """ 
 
@@ -40,6 +40,7 @@ class Organo():
     def get_tipo(self):
         """
         Retorna el tipo de órgano.
+
         returns: 
             Retorna un enum Tipo que representa el tipo de órgano
         """

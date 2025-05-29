@@ -4,9 +4,30 @@ from organo import Organo
 from centro_de_salud import Centro_Salud
 
 class Receptor(Paciente):
-
+    """
+    Esta clase representa a un receptor. Hereda los atributos de la clase Paciente.
+    """
 
     def __init__(self, nombre: str, dni: int, fecha_nac: datetime, sexo: str, tel: str, t_sangre: str, centro_salud: Centro_Salud, organo_r : Organo, dt_espera: datetime, patologia: str, estado: str ):
+        """
+        Inicializa un Receptor.
+        
+        Atributos:
+            - nombre (str): El nombre del receptor.
+            - dni (int): El DNI del receptor.
+            - fecha_nac (datetime): La fecha de nacimiento del receptor.
+            - sexo (str): El sexo del receptor (M/F).
+            - tel (str): El número de teléfono del recptor.
+            - t_sangre (str): El tipo de sangre del receptor.
+            - centro_salud (Centro_Salud): El centro de salud al que está asociado el receptor.
+            - organo_r (Organo): El órgano a recibir.
+            - dt_espera (datetime): Tiempo desde que ingresó al sistema.
+            - patologia (str): La patología del receptor.
+            - estado (str): El estado del receptor (estable/inestable).
+
+        returns:
+            None.
+        """
         super().__init__(nombre, dni, fecha_nac, sexo, tel, t_sangre, centro_salud)
         self.organo_r = organo_r
         self.dt_espera = dt_espera
@@ -16,13 +37,19 @@ class Receptor(Paciente):
         
 
     def calcular_prioridad(self):
-        #La prioridad es un numero del 1 al 10. Esta funcion la calcula
+        """
+        Calcula la prioridad del receptor en dependencia de su edad.
+
+        returns:
+            None.
+        """
+
         if self.estado == "inestable":
             self.prioridad = 10
             return self.prioridad
 
         else:
-            fecha_nacimiento_date = self._fecha_nac.date()  ##Convierto la fecha datetime a date
+            fecha_nacimiento_date = self._fecha_nac.date()
             edad = (date.today() - fecha_nacimiento_date)
             edad = edad.days // 365
             if (edad < 18):
@@ -35,5 +62,9 @@ class Receptor(Paciente):
                 self.prioridad = 2
         return self.prioridad
             
+            
     def __repr__(self):
+        """
+        Retorna todos los atributos del donante.
+        """
         return f"Nombre: {self._nombre}, DNI: {self._dni}, Fecha de nacimiento: {self._fecha_nac}, Sexo: {self._sexo}, Teléfono: {self.tel}, Sangre: {self._t_sangre}, Centro: {self.centro_salud.nombre}, Organo: {self.organo_r._tipo.name}, Ingreso a la lista de espera: {self.dt_espera}, Patología: {self.patologia}, Estado: {self.estado}"

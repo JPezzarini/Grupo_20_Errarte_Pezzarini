@@ -35,14 +35,17 @@ class Centro_Salud:
     def asignar_vehiculo(self, centro_receptor, viaje, fecha_ablacion_donante) -> bool:
         """
         Asigna un vehículo adecuado para el transporte de órganos según la ubicación del centro receptor. 
-        Llama a la función ordenar_vehículo_velocidad()
+        Llama a la función ordenar_vehículo_velocidad.
+
         params:
             - centro_receptor: El centro de salud del paciente receptor.
             - viaje: Información sobre el viaje que se va a realizar.
             - fecha_ablacion_donante: La fecha de ablación del órgano del donante.
+
         returns:
             Retorna un booleano. True si se logró asignar un vehículo correctamente, False en caso contrario.
         """        
+
         self.ordenar_vehiculo_velocidad()
         if (self.provincia == centro_receptor.provincia and self.partido == centro_receptor.partido):
             for i in range (len(self.lista_vehiculos)):
@@ -72,6 +75,7 @@ class Centro_Salud:
         print("No se pudo asignar un vehículo adecuado en este momento")
         return False
     
+    
     def ordenar_vehiculo_velocidad(self) -> None:
         """
         Ordena la lista de vehículos por velocidad en orden descendente.
@@ -83,17 +87,21 @@ class Centro_Salud:
                     self.lista_vehiculos[k] = self.lista_vehiculos[k+1]
                     self.lista_vehiculos[k+1] = a
     
+
     def realizar_transplante(self, cirujano: Cirujano, receptor, organo: Organo) -> bool:
         """
         Realiza el transplante del órgano del donante al receptor.
         El transplante es realizado por el cirujano asignado previamente.
+
         params:
             - cirujano: El cirujano que realizará el trasplante.
             - receptor (Receptor): El receptor del órgano trasplantado.
             - organo: El órgano que se va a trasplantar.
+
         returns:
             Retorna un booleano. True si la operación fue exitosa, False en caso contrario.
         """
+
         cirujano.estado = False
         if (cirujano == organo):
             probabilidad  = randint(1, 10)
@@ -123,12 +131,15 @@ class Centro_Salud:
         """
         Asigna un cirujano disponible para realizar un trasplante.
         Llama a la función realizar_transplante.
+
         params:
             - receptor (Receptor): El receptor del órgano trasplantado.
             - organo: El órgano que se va a trasplantar.
+
         returns:
             Retorna el valor de la función realizar_transplante (bool).
         """
+
         fecha_transplante = datetime.today()
         for i in range (len(self.lista_cirujanos)):
                 self.lista_cirujanos[i].determinar_disponibilidad(fecha_transplante)
@@ -148,9 +159,11 @@ class Centro_Salud:
     def chequear_disponibilidad_cirujano(self):
         """
         Verifica si hay cirujanos disponibles en el centro de salud.
+
         returns:
             Retorna un booleano. True si hay al menos un cirujano disponible, False en caso contrario.
         """
+
         cont = 0
         for i in range (len(self.lista_cirujanos)):
             if self.lista_cirujanos[i].estado == True:

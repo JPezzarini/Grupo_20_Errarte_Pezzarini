@@ -19,6 +19,9 @@ if TYPE_CHECKING:
 
 class Sistema():
 
+    """
+    Esta clase representa el sistema operativo de INCUCAI
+    """
 
     def __init__(self, centros_salud: list, lista_receptores: list, lista_donantes: list):
         self.lista_receptores = lista_receptores

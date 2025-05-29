@@ -8,12 +8,15 @@ class Ambulancia(Vehiculo):
 
     def __init__(self, velocidad):
         """
-        Inicializa una ambulancia
+        Inicializa una ambulancia.
         
         Atributos:
             - velocidad (int): La velocidad del vehículo.
             - registro_viajes (list): Lista de viajes realizados por el vehículo.
             - estado (bool): Estado del vehículo. True indica que está desocupado y False que está ocupado.
+
+        Returns:
+            None.
         """
         super().__init__(velocidad)
 
@@ -27,7 +30,7 @@ class Ambulancia(Vehiculo):
             - fecha_ablacion_donante (datetime): La fecha de ablación del órgano del donante.
             - viaje (str): Inicio y destino del viaje.
         returns:
-            Un objeto datetime que representa la suma de la fecha de ablación del órgano y el tiempo de transporte
+            Un objeto datetime que representa la suma de la fecha de ablación del órgano y el tiempo de transporte.
         """
         tiempo = nivel_trafico + (distancia.__floordiv__(self.velocidad))
         tiempo_final = fecha_ablacion_donante + timedelta(hours = tiempo)

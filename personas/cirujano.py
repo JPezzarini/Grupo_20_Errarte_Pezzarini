@@ -10,8 +10,21 @@ class Especialidad(Enum):
     gastroenterologo = 5
 
 class Cirujano:
+    """
+    Esta clase representa a un cirujano capaz de realizar operaciones a receptores.
+    """
 
-    def __init__(self, especialidad):
+    def __init__(self, especialidad: str): 
+        """
+        Inicializa un Cirujano.
+        
+        params:
+            - especialidad(str): la especialidad del cirujano
+
+        returns:
+            None.
+        """
+
         if isinstance(especialidad, int):
             self.especialidad = Especialidad(especialidad) #Convierte int a enum
         elif isinstance(especialidad, Especialidad):
@@ -19,7 +32,18 @@ class Cirujano:
         self.fecha_ultima_operacion = None
         self.estado = True #True = Desocupado False = Ocupado
 
+
     def determinar_disponibilidad(self, fecha: datetime):
+        """
+        Determina la disponibilidad del cirujano basado en la fecha de la última operación.
+        Si pasaron más de 24 horas, el cirujano queda disponible.
+
+        params:
+            - fecha (datetime): Un objeto datetime que representa la fecha actual.
+        
+        returns:
+            None.
+        """
         if self.fecha_ultima_operacion != None:
             diferencia = (fecha - self.fecha_ultima_operacion).days
             if diferencia >= 1:
@@ -27,9 +51,19 @@ class Cirujano:
         else:
             self.estado = True
 
+
     def __eq__(self, organo: Organo):
+        """
+        Compara la especialidad del cirujano con el tipo de órgano que se pasó como parámetro.
+
+        params:
+            - organo (Organo): El órgano que se desea comparar.
+
+        returns:
+            True si la especialidad coincide con el tipo de órgano y False si no.
+        """
+
         if isinstance(organo, Organo):
-            
             if self.especialidad.value == 1 and organo.get_tipo().value == 1: #Cardiovascular y corazón
                 return True
             if self.especialidad.value == 2 and organo.get_tipo().value == 2: #Pulmonar y pulmón

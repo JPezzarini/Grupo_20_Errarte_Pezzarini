@@ -7,11 +7,15 @@ class Vehiculo(ABC):
     """
     def __init__(self, velocidad):
         """
-        Inicializa un vehículo
+        Inicializa un vehículo.
+
         Atributos:
             - velocidad (int): La velocidad del vehículo.
             - registro_viajes (list): Lista de viajes realizados por el vehículo.
             - estado (bool): Estado del vehículo. True indica que está desocupado y False que está ocupado.
+
+        returns:
+            None.
         """
         self.velocidad = velocidad
         self.registro_viajes = []

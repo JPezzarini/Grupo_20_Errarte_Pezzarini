@@ -20,6 +20,8 @@ class Paciente(ABC):
             - tel (str): El número de teléfono del paciente.
             - t_sangre (str): El tipo de sangre del paciente.
             - centro_salud (Centro_Salud): El centro de salud al que está asociado el paciente.
+        returns:
+            None.
         """
         self._nombre = nombre
         self._dni = dni
