@@ -9,6 +9,7 @@ class Helicoptero(Vehiculo):
     def __init__(self, velocidad):
         """
         Inicializa un objeto helicóptero
+
         Atributos:
             - velocidad (int): La velocidad del vehículo.
             - registro_viajes (list): Lista de viajes realizados por el vehículo.
@@ -21,10 +22,10 @@ class Helicoptero(Vehiculo):
         """
         Método abstracto para realizar el transporte de órganos.
         params:
-            distancia (int): La distancia a recorrer en kilómetros.
-            nivel_trafico (int): El nivel de tráfico.
-            fecha_ablacion_donante (datetime): La fecha de ablación del órgano del donante.
-            viaje (str): Inicio y destino del viaje.
+            - distancia (int): La distancia a recorrer en kilómetros.
+            - nivel_trafico (int): El nivel de tráfico.
+            - fecha_ablacion_donante (datetime): La fecha de ablación del órgano del donante.
+            - viaje (str): Inicio y destino del viaje.
         returns:
             Un objeto datetime que representa la suma de la fecha de ablación del órgano y el tiempo de transporte
         """

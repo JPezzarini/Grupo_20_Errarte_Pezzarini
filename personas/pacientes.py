@@ -33,10 +33,13 @@ class Paciente(ABC):
     def get_nombre(self) -> str:
         """
         Retorna el nombre del paciente.
+
         returns:
             Un str que indica el nombre del paciente.
         """
         return self._nombre
+    
+    
     def get_dni(self) -> int:
         """
         Retorna el DNI del paciente.
@@ -44,6 +47,8 @@ class Paciente(ABC):
             Un int que indica el DNI del paciente.
         """
         return self._dni
+    
+    
     def get_fecha_nac(self) -> datetime:
         """
         Retorna la fecha de nacimiento del paciente.
@@ -51,6 +56,8 @@ class Paciente(ABC):
             Un objeto datetime que indica la fecha de nacimiento del paciente.
         """
         return self._fecha_nac
+    
+
     def get_sexo(self) -> str:
         """
         Retorna el sexo del paciente.
@@ -58,6 +65,8 @@ class Paciente(ABC):
             Un str que indica el sexo del paciente.
         """
         return self._sexo
+    
+
     def get_t_sangre(self) -> str:
         """
         Retorna el tipo de sangre del paciente.
@@ -66,6 +75,7 @@ class Paciente(ABC):
         """
         return self._t_sangre
 
+
     def set_nombre(self, nombre: str) -> None:
         """
         Establece el nombre del paciente.
@@ -73,6 +83,8 @@ class Paciente(ABC):
             - nombre: El nuevo nombre del paciente.
         """
         self._nombre = nombre
+
+
     def set_dni(self, dni: int) -> None:
         """
         Establece el DNI del paciente.
@@ -80,6 +92,8 @@ class Paciente(ABC):
             - dni: El nuevo DNI del paciente.
         """
         self._dni = dni
+
+
     def set_fecha_nac(self, fecha_nac: datetime) -> None:
         """
         Establece la fecha de nacimiento del paciente.
@@ -87,6 +101,8 @@ class Paciente(ABC):
             - fecha_nac: La nueva fecha de nacimiento del paciente.
         """
         self._fecha_nac = fecha_nac
+
+
     def set_sexo(self, sexo: str) -> None:
         """
         Establece el sexo del paciente.
@@ -94,6 +110,8 @@ class Paciente(ABC):
             - sexo: El nuevo sexo del paciente.
         """
         self._sexo = sexo
+
+        
     def set_t_sangre(self, t_sangre: str) -> None:
         """
         Establece el tipo de sangre del paciente.
