@@ -12,7 +12,7 @@ class Centro_Salud:
     Esta clase representa un centro de salud que gestiona cirujanos y vehículos para realizar trasplantes.
     """
 
-    def __init__(self, nombre: str, partido: str, provincia: str, tel: str, cirujanos: list, vehiculos: list):
+    def __init__(self, nombre: str, partido: str, provincia: str, tel: str, cirujanos: list[Cirujano], vehiculos: list):
         """
         Inicializa un centro de salud.
         Atributos:
@@ -156,7 +156,7 @@ class Centro_Salud:
                 return self.realizar_transplante(self, self.lista_cirujanos[i], receptor, organo)
                 
 
-    def chequear_disponibilidad_cirujano(self):
+    def chequear_disponibilidad_cirujano(self) -> bool:
         """
         Verifica si hay cirujanos disponibles en el centro de salud.
 

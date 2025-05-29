@@ -23,14 +23,14 @@ class Sistema():
     Esta clase representa el sistema operativo de INCUCAI
     """
 
-    def __init__(self, centros_salud: list, lista_receptores: list, lista_donantes: list):
+    def __init__(self, centros_salud: list[Centro_Salud], lista_receptores: list[Receptor], lista_donantes: list[Donante]):
         self.lista_receptores = lista_receptores
         self.lista_donantes = lista_donantes
         self.lista_centros = centros_salud
 
 
 
-    def recibir_paciente(self, paciente: Paciente):
+    def recibir_paciente(self, paciente) -> None:
         """
         Agrega un paciente al sistema, determinando si es donante o receptor.
         Llama a las funciones recibir_donante y recibir_receptor.
@@ -52,7 +52,7 @@ class Sistema():
             self.recibir_receptor(paciente)
 
 
-    def recibir_donante(self, donante: Donante):
+    def recibir_donante(self, donante: Donante) -> None:
         """
         Agrega un donante al sistema y busca match con los receptores del mismo.
 
@@ -85,7 +85,7 @@ class Sistema():
         self.buscar_match_receptor(receptor)
     
 
-    def elegir_receptor(self, receptores: list):
+    def elegir_receptor(self, receptores: list[Receptor]) -> Receptor:
         """
         Ordena la lista de receptores compatibles según su prioridad de manera descendente.
         Llama a la función elegir_receptor_prioridad.
@@ -107,7 +107,7 @@ class Sistema():
         return receptor_match
 
 
-    def elegir_receptor_prioridad(self, receptores: list):
+    def elegir_receptor_prioridad(self, receptores: list[Receptor]) -> Receptor:
         """
         Ordena la lista de receptores. En caso de tener la misma prioridad, los ordena por tiempo de ingreso en el sistema
         de manera descendiente.
@@ -129,7 +129,7 @@ class Sistema():
     
 
 
-    def buscar_match_donante(self,donante: Donante,organo: Organo, k):
+    def buscar_match_donante(self,donante: Donante,organo: Organo, k: int) -> None:
         """
         Busca receptores compatibles según el donante y el órgano especificado.
         En caso de encontrar un match, busca un transporte y cirujano disponibles.  
@@ -174,7 +174,7 @@ class Sistema():
                     receptor_match.estado = "inestable"
             
 
-    def buscar_match_receptor(self, receptor: Receptor):
+    def buscar_match_receptor(self, receptor: Receptor) -> None:
         """
         Busca un donante compatible para el receptor especificado.
         En caso de encontrar un match, busca un transporte y cirujano disponibles. 
@@ -222,7 +222,7 @@ class Sistema():
             print("No se encontraron donantes compatibles")
 
 
-    def crear_paciente(self, centro_salud: Centro_Salud):
+    def crear_paciente(self, centro_salud: Centro_Salud) -> None:
         """
         Crea un nuevo paciente por consola y lo agrega al sistema.
 
@@ -336,7 +336,6 @@ class Sistema():
             paciente = Donante(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, dt_fallecimiento, lista_organos)
 
         else:
-            tipo = str(input("ingrese el tipo de organo: "))
             flag = False
             while flag == False:
                 try:
@@ -370,10 +369,10 @@ class Sistema():
                     flag = True
             flag = False
             paciente = Receptor(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, organo_r, dt_espera, patologia,estado)
-
+        print("El paciente fue creado con éxito. Se lo recibirá y se buscarán las compatibilidades de todos los pacientes del sistema")
         self.recibir_paciente(paciente)
 
-    def crear_cirujano(self, centro_salud: Centro_Salud):
+    def crear_cirujano(self, centro_salud: Centro_Salud) -> None:
         """
         Crea un nuevo cirujano por consola y lo agrega a la lista del centro de salud especificado.
 
@@ -387,7 +386,7 @@ class Sistema():
         flag = False
         while flag == False:
             try:
-                especialidad = str(input("ingrese su especialidad: "))
+                especialidad = str(input("Ingrese su especialidad: "))
                 if especialidad not in ("general","cardiovascular","pulmonar","plastico","traumatologo","gastroenterologo"):
                     raise ValueError("Entrada inválida, especialidad no admitida")
             except ValueError as e:
@@ -396,9 +395,10 @@ class Sistema():
                 flag = True
         cirujano = Cirujano(Especialidad[especialidad])
         centro_salud.lista_cirujanos.append(cirujano)
+        print("El cirujano fue creado con éxito")
 
 
-    def listar_receptores(self):
+    def listar_receptores(self) -> None:
         """
         Imprime la lista de receptores del sistema.
 
@@ -417,7 +417,7 @@ class Sistema():
             print(self.lista_receptores[i].__repr__())
 
 
-    def listar_donantes(self):
+    def listar_donantes(self) -> None:
         """
         Imprime la lista de donantes del sistema.
 
