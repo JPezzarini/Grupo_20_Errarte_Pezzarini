@@ -28,8 +28,20 @@ class Sistema():
 
 
     def recibir_paciente(self, paciente) -> None:
-        # esta funcon agrega un paciente a sistema, lo agreaga a la lista de donantes o receptores dependiendo lo que se ingrese
-        #llama a las funciones recibir_donante y recibir_receptor respectivamente
+        """
+        Agrega un paciente al sistema, determinando si es donante o receptor.
+        Llama a las funciones recibir_donante y recibir_receptor.
+
+        Params:
+            - paciente (Paciente): El paciente paciente a agregar.
+
+        Precon:
+            El paciente debe ser instanciado como Donante o Receptor, puesto que
+            paciente es una clase abstracta.
+
+        Returns:
+            None.
+        """
 
         if isinstance(paciente, Donante):
             self.recibir_donante(paciente)
@@ -38,8 +50,15 @@ class Sistema():
 
 
     def recibir_donante(self, donante: Donante) -> None:
-        #agrega al donante al sistema y busca match con los receptores del mismo
-        #los while sirven para que no se vayan de rango la slistas si retiramos un elemento de ellas
+        """
+        Agrega un donante al sistema y busca match con los receptores del mismo.
+
+        Params:
+            - donante (Donante): El donante a agregar.
+
+        Returns:
+            None.
+         """
 
         self.lista_donantes.append(donante)
         i=0
@@ -49,15 +68,31 @@ class Sistema():
             i+=1
 
     def recibir_receptor(self, receptor: Receptor):
-        #agrega al receptor al sistema y busca match con los donantes del mismo
+        """
+        Agrega un receptor al sistema y busca match con los donantes del mismo.
+
+        Params:
+            - receptor (Receptor): El receptor a agregar.
+
+        Returns:
+            None.
+        """
 
         self.lista_receptores.append(receptor)
         self.buscar_match_receptor(receptor)
     
 
     def elegir_receptor(self, receptores: list[Receptor]) -> Receptor:
-        #La lista de receptores tiene todos los receptores compatibles que necesiten el órgano especificado
-        #Esta lista fue hecha en la funcion buscar_match
+        """
+        Ordena la lista de receptores compatibles según su prioridad de manera descendente.
+        Llama a la función elegir_receptor_prioridad.
+
+        Params:
+            - receptores (list): La lista de receptores compatibles con el órgano del donante.
+
+        Returns:
+            un objeto de tipo Receptor que representa el receptor de mayor prioridad en la lista.
+        """
         
         for i in range(len(receptores)):
             for k in range (0,len(receptores)-1-i):
@@ -66,11 +101,20 @@ class Sistema():
                     receptores[k] = receptores[k+1]
                     receptores[k+1] = a
         receptor_match = self.elegir_receptor_prioridad(receptores)
-        return receptor_match # retorna el receptor de mayor prioridad
+        return receptor_match
 
 
     def elegir_receptor_prioridad(self, receptores: list[Receptor]) -> Receptor:
-        #se ordena la lista de receptores compatibles en, caso de que tengan la misma prioridad, por antiguedad en el sistema
+        """
+        Ordena la lista de receptores. En caso de tener la misma prioridad, los ordena por tiempo de ingreso en el sistema
+        de manera descendiente.
+
+        Params:
+            - receptores (list): La lista de receptores compatibles con el órgano del donante.
+
+        Returns:
+            un objeto de tipo Receptor que representa el receptor de mayor prioridad en la lista.
+        """
 
         for i in range(len(receptores)):
             for k in range (0,len(receptores)-1-i):
@@ -83,8 +127,19 @@ class Sistema():
 
 
     def buscar_match_donante(self,donante: Donante,organo: Organo, k: int) -> None:
-        #busca receptores compatibles segun el donante pasado como parametro, armando una lista de ellos
-        #pasa la lista a las funciones de ordenamiento, que devuelven el receptor final para la operacion 
+        """
+        Busca receptores compatibles según el donante y el órgano especificado.
+        En caso de encontrar un match, busca un transporte y cirujano disponibles.  
+        Llama a la funcion elegir_receptor, asignar_vehiculo y asignar_cirujano.
+
+        Params:
+            - donante (Donante): Un donante del sitema.
+            - organo (Organo): El órgano a donar.
+            - k (int): Un índice que representa la posición del órgano en la lista de órganos del donante.
+
+        Returns:
+            None
+        """
 
         receptores = []
         for i in range(len(self.lista_receptores)):
@@ -117,8 +172,20 @@ class Sistema():
             
 
     def buscar_match_receptor(self, receptor: Receptor) -> None:
-        #busca al primer donante compatible segun el receptor pasado como parametro
-        #los while sirven para que no se vayan de rango las listas si retiramos un elemento de ellas
+        """
+        Busca un donante compatible para el receptor especificado.
+        En caso de encontrar un match, busca un transporte y cirujano disponibles. 
+        Llama a la funcion elegir_receptor, asignar_vehiculo y asignar_cirujano.
+
+        Params:
+            - receptor (Receptor): Un receptor del sistema.
+
+        Precon (opcional):
+            El receptor debe ser una instancia válida de Receptor.
+
+        Returns:
+            None
+        """
 
         i = 0
         cont = 0 
@@ -153,7 +220,15 @@ class Sistema():
 
 
     def crear_paciente(self, centro_salud: Centro_Salud) -> None:
-        #se crea un paciente pasando los parametros a mano, luego llama a las respectivas funciones de buscar_match
+        """
+        Crea un nuevo paciente por consola y lo agrega al sistema.
+
+        Params:
+            - centro_salud (Centro_Salud): Centro de salud al que pertenecerá el paciente.
+
+        Returns:
+            None.
+        """
 
         nombre = str(input("Ingrese el nombre del paciente: "))
         flag = False
@@ -296,6 +371,16 @@ class Sistema():
         self.recibir_paciente(paciente)
 
     def crear_cirujano(self, centro_salud: Centro_Salud) -> None:
+        """
+        Crea un nuevo cirujano por consola y lo agrega a la lista del centro de salud especificado.
+
+        Params:
+            - centro_salud (Centro_Salud): El centro de salud al que pertenecerá el cirujano.
+
+        Returns:
+            None.
+        """
+
         flag = False
         while flag == False:
             try:
@@ -310,9 +395,16 @@ class Sistema():
         centro_salud.lista_cirujanos.append(cirujano)
 
 
-
     def listar_receptores(self) -> None:
-        #printea la lista de receptores del sistema
+        """
+        Imprime la lista de receptores del sistema.
+
+        Params:
+            None.
+
+        Returns:
+            None.
+        """
 
         if self.lista_receptores == False:
             print("No hay receptores en el sistema")
@@ -321,8 +413,17 @@ class Sistema():
         for i in range (len(self.lista_receptores)):
             print(self.lista_receptores[i].__repr__())
 
+
     def listar_donantes(self) -> None:
-        #printea la lista de donantes del sistema
+        """
+        Imprime la lista de donantes del sistema.
+
+        Params:
+            None.
+
+        Returns:
+            None.
+        """
 
         if self.lista_donantes == False:
             print("No hay donantes en el sistema")
@@ -333,16 +434,48 @@ class Sistema():
                 
 
     def buscar_receptores_centro_salud(self, centro_de_salud: str) -> None:
+        """
+        Busca e imprime los receptores asociados a un centro de salud específico.
+
+        Params:
+            - centro_de_salud (str): El nombre del centro de salud.
+
+        Returns:
+            None
+        """
+            
         for i in range(len(self.lista_receptores)):
             if (self.lista_receptores[i].centro_salud.nombre == centro_de_salud):
                 print(self.lista_receptores[i].__repr__())
 
+
     def buscar_donantes_centro_salud(self, centro_de_salud:str) -> None:
+        """
+        Busca e imprime los donantes asociados a un centro de salud específico.
+
+        Params:
+            - centro_de_salud (str): El nombre del centro de salud.
+
+        Returns:
+            None
+        """
+
         for i in range(len(self.lista_donantes)):
             if (self.lista_donantes[i].centro_salud.nombre == centro_de_salud):
                 print(self.lista_donantes[i].__repr__())
+
     
     def informar_prioridad_receptor(self, dni_receptor) -> None:
+        """
+        Busca e informa la prioridad de un receptor según su DNI.
+
+        Params:
+            - dni_receptor (int): El DNI del receptor.
+
+        Returns:
+            None
+        """
+
         try:
             cont = 0
             for i in range(len(self.lista_receptores)):
