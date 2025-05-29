@@ -36,7 +36,7 @@ class Sistema():
         Llama a las funciones recibir_donante y recibir_receptor.
 
         Params:
-            - paciente (Paciente): El paciente paciente a agregar.
+            - paciente (Paciente): El paciente a agregar.
 
         Precon:
             El paciente debe ser instanciado como Donante o Receptor, puesto que
@@ -55,7 +55,7 @@ class Sistema():
     def recibir_donante(self, donante: Donante) -> None:
         """
         Agrega un donante al sistema y busca match con los receptores del mismo.
-
+        Llama a la función buscar_match_donante
         Params:
             - donante (Donante): El donante a agregar.
 
@@ -70,10 +70,10 @@ class Sistema():
             self.buscar_match_donante(donante,donante.lista_organos[i],k)
             i+=1
 
-    def recibir_receptor(self, receptor: Receptor):
+    def recibir_receptor(self, receptor: Receptor) -> None:
         """
         Agrega un receptor al sistema y busca match con los donantes del mismo.
-
+        Llama a la función buscar_match_receptor
         Params:
             - receptor (Receptor): El receptor a agregar.
 
@@ -91,7 +91,7 @@ class Sistema():
         Llama a la función elegir_receptor_prioridad.
 
         Params:
-            - receptores (list): La lista de receptores compatibles con el órgano del donante.
+            - receptores (list[Receptor]): La lista de receptores compatibles con el órgano del donante.
 
         Returns:
             un objeto de tipo Receptor que representa el receptor de mayor prioridad en la lista.
@@ -113,7 +113,7 @@ class Sistema():
         de manera descendiente.
 
         Params:
-            - receptores (list): La lista de receptores compatibles con el órgano del donante.
+            - receptores (list[Receptor]): La lista de receptores compatibles con el órgano del donante.
 
         Returns:
             un objeto de tipo Receptor que representa el receptor de mayor prioridad en la lista.

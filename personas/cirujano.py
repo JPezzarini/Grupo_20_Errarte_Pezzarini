@@ -14,12 +14,15 @@ class Cirujano:
     Esta clase representa a un cirujano capaz de realizar operaciones a receptores.
     """
 
-    def __init__(self, especialidad: str): 
+    def __init__(self, especialidad): 
         """
         Inicializa un Cirujano.
         
         params:
-            - especialidad(str): la especialidad del cirujano
+            - especialidad(Especialidad): La especialidad del cirujano.
+              Puede inicializarse con un int o con un valor del enum Especialidad
+            - fecha_ultima_operacion (datetime): La fecha en la que el cirujano realizó su última operación
+            -estado (bool): El estado del cirujano. True si está desocupado, False si está ocupado
 
         returns:
             None.
@@ -30,10 +33,10 @@ class Cirujano:
         elif isinstance(especialidad, Especialidad):
             self.especialidad = especialidad #Asigna directamente enum
         self.fecha_ultima_operacion = None
-        self.estado = True #True = Desocupado False = Ocupado
+        self.estado = True
 
 
-    def determinar_disponibilidad(self, fecha: datetime):
+    def determinar_disponibilidad(self, fecha: datetime) -> None:
         """
         Determina la disponibilidad del cirujano basado en la fecha de la última operación.
         Si pasaron más de 24 horas, el cirujano queda disponible.
@@ -52,7 +55,7 @@ class Cirujano:
             self.estado = True
 
 
-    def __eq__(self, organo: Organo):
+    def __eq__(self, organo: Organo) -> bool:
         """
         Compara la especialidad del cirujano con el tipo de órgano que se pasó como parámetro.
 

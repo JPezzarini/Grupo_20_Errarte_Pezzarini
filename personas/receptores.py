@@ -36,12 +36,12 @@ class Receptor(Paciente):
         self.prioridad = self.calcular_prioridad()
         
 
-    def calcular_prioridad(self):
+    def calcular_prioridad(self) -> int:
         """
         Calcula la prioridad del receptor en dependencia de su edad.
 
         returns:
-            None.
+            Un int que indica la prioridad del paciente en la escala
         """
 
         if self.estado == "inestable":
@@ -63,7 +63,7 @@ class Receptor(Paciente):
         return self.prioridad
             
             
-    def __repr__(self):
+    def __repr__(self) -> None:
         """
         Retorna todos los atributos del donante.
         """
