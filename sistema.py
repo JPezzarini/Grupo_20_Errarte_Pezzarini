@@ -333,7 +333,6 @@ class Sistema():
             paciente = Donante(nombre, dni, fecha_nacimiento, sexo, telefono, tipo_sangre, centro_salud, dt_fallecimiento, lista_organos)
 
         else:
-            tipo = str(input("ingrese el tipo de organo: "))
             flag = False
             while flag == False:
                 try:
