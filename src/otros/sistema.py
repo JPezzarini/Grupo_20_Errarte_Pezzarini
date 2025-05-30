@@ -222,7 +222,7 @@ class Sistema():
                             else: #si sale mal se pierde el organo y el receptor pasa a estar inestable
                                 receptor.estado = "inestable"
                             self.lista_donantes[i].lista_organos.pop(k)
-                            if (self.lista_donantes[i].lista_organos): #Si el donante ya no tiene más organos se retira al donante de la lista
+                            if (len(self.lista_donantes[i].lista_organos) == 0): #Si el donante ya no tiene más organos se retira al donante de la lista
                                 self.lista_donantes.pop(i)
                             return
                         
@@ -233,7 +233,7 @@ class Sistema():
                                 else: #si sale mal se pierde el organo y el receptor pasa a estar inestable
                                     receptor.estado = "inestable"
                                 self.lista_donantes[i].lista_organos.pop(k)
-                                if (self.lista_donantes[i].lista_organos): #Si el donante ya no tiene más organos se retira al donante de la lista
+                                if (len(self.lista_donantes[i].lista_organos) == 0): #Si el donante ya no tiene más organos se retira al donante de la lista
                                     self.lista_donantes.pop(i)
                                 return
                 k+=1
