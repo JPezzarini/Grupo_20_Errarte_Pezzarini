@@ -509,7 +509,7 @@ class Sistema():
                     print(f"En la escala de prioridad, el paciente se encuentra en el nivel {self.lista_receptores[i].prioridad}")
                     return
             if cont == 0:
-                raise DisponibilidadError("No se encontró al paciente.")
-        except DisponibilidadError as e:
+                raise EncontrarpacienteError("No se encontró al paciente.")
+        except EncontrarpacienteError as e:
             print(e)
                 
