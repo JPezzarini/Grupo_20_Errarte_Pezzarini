@@ -153,7 +153,7 @@ class Centro_Salud:
             self.lista_cirujanos[i].determinar_disponibilidad(fecha_transplante)
             if (self.lista_cirujanos[i].estado):
                 self.lista_cirujanos[i].fecha_ultima_operacion = fecha_transplante
-                return self.realizar_transplante(self, self.lista_cirujanos[i], receptor, organo)
+                return self.realizar_transplante(self.lista_cirujanos[i], receptor, organo)
                 
 
     def chequear_disponibilidad_cirujano(self) -> bool:
