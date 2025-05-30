@@ -165,13 +165,22 @@ class Sistema():
             donante.lista_organos[k].dt_ablacion = datetime.combine(hoy,time(random.randint(0,23),random.randint(0,59),random.randint(0,59))) # creo una fecha y tiempo de ablacion random
             fecha_ablacion = donante.lista_organos[k].dt_ablacion #guarda la fecha en una variable para pasarla entre funciones
             viaje = f"{donante.centro_salud.nombre}-{receptor_match.centro_salud.nombre}" #guarda el viaje para pasarselo al vehiculo
-            if(donante.centro_salud.asignar_vehiculo(receptor_match.centro_salud,viaje,fecha_ablacion)):
+            if(receptor_match.centro_salud == donante.centro_salud):
                 if (receptor_match.centro_salud.asignar_cirujano(receptor_match, donante.lista_organos[k])): #si sale bien se retira el organo y se retira el receptor de la lista
                     self.lista_receptores.remove(receptor_match)
                     donante.lista_organos.remove(organo)
                 else: #si sale mal se pierde el organo y el receptor pasa a estar inestable
                     donante.lista_organos.remove(organo)
                     receptor_match.estado = "inestable"
+            
+            else:
+                if(donante.centro_salud.asignar_vehiculo(receptor_match.centro_salud,viaje,fecha_ablacion)):
+                    if (receptor_match.centro_salud.asignar_cirujano(receptor_match, donante.lista_organos[k])): #si sale bien se retira el organo y se retira el receptor de la lista
+                        self.lista_receptores.remove(receptor_match)
+                        donante.lista_organos.remove(organo)
+                    else: #si sale mal se pierde el organo y el receptor pasa a estar inestable
+                        donante.lista_organos.remove(organo)
+                        receptor_match.estado = "inestable"
             
 
     def buscar_match_receptor(self, receptor: Receptor) -> None:
@@ -187,7 +196,7 @@ class Sistema():
             El receptor debe ser una instancia válida de Receptor.
 
         Returns:
-            None
+            None.
         """
 
         i = 0
@@ -207,7 +216,7 @@ class Sistema():
                         self.lista_donantes[i].lista_organos[k].dt_ablacion = datetime.combine(hoy,time(random.randint(0,23),random.randint(0,59),random.randint(0,59))) # creo una fecha y tiempo de ablacion random
                         fecha_ablacion = self.lista_donantes[i].lista_organos[k].dt_ablacion #guardo la fecha en una variable para pasarla entre funciones
                         viaje = f"{self.lista_donantes[i].centro_salud.nombre}-{receptor.centro_salud.nombre}" #me guardo el viaje para pasarselo al vehiculo 
-                        if(self.lista_donantes[i].centro_salud.asignar_vehiculo(receptor.centro_salud,viaje,fecha_ablacion)):
+                        if(self.lista_donantes[i].centro_salud == receptor.centro_salud):
                             if (receptor.centro_salud.asignar_cirujano(receptor, self.lista_donantes[i].lista_organos[k])): #si sale bien se retira el organo y se retira el receptor de la lista
                                 self.lista_receptores.remove(receptor)
                             else: #si sale mal se pierde el organo y el receptor pasa a estar inestable
@@ -216,6 +225,17 @@ class Sistema():
                             if (self.lista_donantes[i].lista_organos): #Si el donante ya no tiene más organos se retira al donante de la lista
                                 self.lista_donantes.pop(i)
                             return
+                        
+                        else:
+                            if(self.lista_donantes[i].centro_salud.asignar_vehiculo(receptor.centro_salud,viaje,fecha_ablacion)):
+                                if (receptor.centro_salud.asignar_cirujano(receptor, self.lista_donantes[i].lista_organos[k])): #si sale bien se retira el organo y se retira el receptor de la lista
+                                    self.lista_receptores.remove(receptor)
+                                else: #si sale mal se pierde el organo y el receptor pasa a estar inestable
+                                    receptor.estado = "inestable"
+                                self.lista_donantes[i].lista_organos.pop(k)
+                                if (self.lista_donantes[i].lista_organos): #Si el donante ya no tiene más organos se retira al donante de la lista
+                                    self.lista_donantes.pop(i)
+                                return
                 k+=1
             i+= 1
         if ( cont == 0):
