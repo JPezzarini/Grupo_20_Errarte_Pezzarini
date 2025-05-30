@@ -343,9 +343,9 @@ class Sistema():
                     print("Formato de fecha inválido, ingréselo devuelta")
                 else:
                     flag = True
-                if (dt_fallecimiento < fecha_nacimiento or dt_fallecimiento > datetime.today()):
-                    print("Entrada inválida. Fecha imposible")
-                    flag = False
+                    if (dt_fallecimiento < fecha_nacimiento or dt_fallecimiento > datetime.today()):
+                        print("Entrada inválida. Fecha imposible")
+                        flag = False
 
             flag = False
     
@@ -390,9 +390,9 @@ class Sistema():
                     print("Formato de fecha inválido, ingréselo devuelta")
                 else:
                     flag = True
-                if (dt_espera < fecha_nacimiento or dt_espera > datetime.today()):
-                    print("Entrada inválida. Fecha imposible")
-                    flag = False
+                    if (dt_espera < fecha_nacimiento or dt_espera > datetime.today()):
+                        print("Entrada inválida. Fecha imposible")
+                        flag = False
             flag = False
 
             patologia = str(input("ingrese su patologia: "))
