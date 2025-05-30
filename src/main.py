@@ -1,15 +1,15 @@
 from personas.pacientes import Paciente
-from centro_de_salud import Centro_Salud
-from sistema import Sistema
+from otros.centro_de_salud import Centro_Salud
+from otros.sistema import Sistema
 from personas.donantes import *
 from personas.receptores import Receptor
-from organo import Organo
+from otros.organo import Organo
 from vehiculos.vehiculo import Vehiculo
 from vehiculos.ambulancia import Ambulancia
 from vehiculos.avion import Avion
 from vehiculos.helicoptero import Helicoptero
 from personas.cirujano import *
-from organo import *
+from otros.organo import *
 import csv
 import random
 vehiculos1 = [Avion(90), Helicoptero(100), Ambulancia(110), Ambulancia(85), Ambulancia(95)]

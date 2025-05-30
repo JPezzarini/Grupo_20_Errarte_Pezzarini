@@ -1,4 +1,4 @@
-from organo import *
+from otros.organo import *
 from enum import Enum
 from datetime import *
 class Especialidad(Enum):

@@ -6,12 +6,12 @@ from personas.donantes import Donante
 from personas.receptores import Receptor
 from vehiculos.vehiculo import Vehiculo
 import random
-from organo import *
+from otros.organo import *
 from excepciones.error import *
 from personas.cirujano import *
 if TYPE_CHECKING:
     from personas.pacientes import Paciente
-    from centro_de_salud import Centro_Salud
+    from otros.centro_de_salud import Centro_Salud
     from vehiculos.ambulancia import Ambulancia
     from vehiculos.avion import Avion
     from vehiculos.helicoptero import Helicoptero
@@ -335,6 +335,9 @@ class Sistema():
                 except ValueError:
                     print("Formato de fecha inválido, ingréselo devuelta")
                 else:
+                    hora = int(input("Ingrese la hora (0-23): "))
+                    minutos = int(input("Ingrese los minutos (0-59): "))
+                    dt_fallecimiento = dt_fallecimiento.replace(hour = hora, minute = minutos)
                     flag = True
             flag = False
     

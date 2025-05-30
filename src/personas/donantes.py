@@ -1,7 +1,7 @@
 from personas.pacientes import Paciente
 from datetime import *
-from centro_de_salud import Centro_Salud
-from organo import *
+from otros.centro_de_salud import Centro_Salud
+from otros.organo import *
 
 
 class Donante(Paciente):

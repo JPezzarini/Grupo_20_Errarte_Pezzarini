@@ -1,7 +1,7 @@
 from personas.pacientes import Paciente
 from datetime import *
-from organo import Organo
-from centro_de_salud import Centro_Salud
+from otros.organo import Organo
+from otros.centro_de_salud import Centro_Salud
 
 class Receptor(Paciente):
     """

@@ -1,7 +1,7 @@
 
 from abc import ABC, abstractmethod
 from datetime import *
-from centro_de_salud import Centro_Salud
+from otros.centro_de_salud import Centro_Salud
 
 
 class Paciente(ABC):
