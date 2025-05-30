@@ -18,12 +18,12 @@ vehiculos1 = [Avion(90), Helicoptero(100), Ambulancia(110), Ambulancia(85), Ambu
 vehiculos2 = [Avion(80), Avion(120), Helicoptero(100), Ambulancia(105), Ambulancia(90)]
 vehiculos3 = [Avion(80), Ambulancia(80), Ambulancia(60)]
 #Creación de cirujanos con su especialidad
-gomez = Cirujano(Especialidad(5))
-fischer = Cirujano(Especialidad(1))
-fernandez = Cirujano(Especialidad(2))
-lopez = Cirujano(Especialidad(3))
-errarte = Cirujano(Especialidad(4))
-pezzarini = Cirujano(Especialidad(0))
+gomez = Cirujano(Especialidad(5), "Alejandro Gomez")
+fischer = Cirujano(Especialidad(1), "Edmundo Cabrera Fischer")
+fernandez = Cirujano(Especialidad(2), "Claudio Fernandez")
+lopez = Cirujano(Especialidad(3), "Lisandro Lopez")
+errarte = Cirujano(Especialidad(4), "Mateo Errarte")
+pezzarini = Cirujano(Especialidad(0), "Juan Pezzarini")
 # Creación de Centros de Salud
 cs1 = Centro_Salud("Hospital Central", "La Plata", "Buenos Aires", "+54 911 1234-5678",[gomez, fischer], vehiculos1)
 cs2 = Centro_Salud("Clínica del Sur", "Avellaneda", "Buenos Aires", "+54 911 8765-4321", [fernandez, lopez], vehiculos2)

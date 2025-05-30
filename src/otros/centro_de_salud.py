@@ -53,6 +53,7 @@ class Centro_Salud:
                     if (self.lista_vehiculos[i].estado):
                         distancia = randint(1,25) #en km
                         nivel_trafico = uniform(0,2)
+                        print(f"Se realizará el transporte utilizando una ambulancia del centro {self.nombre}")
                         self.lista_vehiculos[i].realizar_transporte(distancia, nivel_trafico, fecha_ablacion_donante, viaje)
                         return True
         if (self.provincia == centro_receptor.provincia and self.partido != centro_receptor.partido):
@@ -61,6 +62,7 @@ class Centro_Salud:
                     if (self.lista_vehiculos[i].estado):
                         distancia = randint(25,100)
                         nivel_trafico = 0
+                        print(f"Se realizará el transporte utilizando un helicoptero del centro {self.nombre}")
                         self.lista_vehiculos[i].realizar_transporte(distancia, nivel_trafico, fecha_ablacion_donante, viaje)
                         return True
         if (self.provincia != centro_receptor.provincia):
@@ -69,6 +71,7 @@ class Centro_Salud:
                     if (self.lista_vehiculos[i].estado):
                         distancia = randint(100,3000) 
                         nivel_trafico = 0
+                        print(f"Se realizará el transporte utilizando un avión del centro {self.nombre}")
                         self.lista_vehiculos[i].realizar_transporte(distancia, nivel_trafico, fecha_ablacion_donante, viaje)
                         return True
         
@@ -146,6 +149,7 @@ class Centro_Salud:
                 if (self.lista_cirujanos[i] == organo and self.lista_cirujanos[i].estado == True):
                     self.lista_cirujanos[i].fecha_ultima_operacion = fecha_transplante
                     self.lista_cirujanos[i].estado = False
+                    print(f"El cirujano que realizará la cirujía es: {self.lista_cirujanos[i].nombre}")
                     return self.realizar_transplante(self.lista_cirujanos[i], receptor, organo)
                     
         #Si no encuentra un especialista disponible, asigna al primer cirujano disponible, no importa especialidad        
@@ -153,6 +157,7 @@ class Centro_Salud:
             self.lista_cirujanos[i].determinar_disponibilidad(fecha_transplante)
             if (self.lista_cirujanos[i].estado):
                 self.lista_cirujanos[i].fecha_ultima_operacion = fecha_transplante
+                print(f"El cirujano que realizará la cirujía es: {self.lista_cirujanos[i].nombre}")
                 return self.realizar_transplante(self.lista_cirujanos[i], receptor, organo)
                 
 

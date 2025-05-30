@@ -154,6 +154,7 @@ class Sistema():
             return
         
         receptor_match = self.elegir_receptor(receptores) #receptor de mayor prioridad
+        print(f"El receptor de mayor prioridad elegido es DNI {receptor_match.get_dni()}")
         
         try:
             if(receptor_match.centro_salud.chequear_disponibilidad_cirujano() == False):
@@ -208,6 +209,7 @@ class Sistema():
             k=0
             while k < (len(self.lista_donantes[i].lista_organos)):
                 if(receptor.organo_r.get_tipo() == self.lista_donantes[i].lista_organos[k].get_tipo() and receptor.get_t_sangre() == self.lista_donantes[i].get_t_sangre()):
+                    print(f"Se ha encontrado una compatibilidad con el donante DNI {self.lista_donantes[i].get_dni()}")
                     cont += 1
                     try:    
                         if (receptor.centro_salud.chequear_disponibilidad_cirujano() == False):
@@ -434,7 +436,8 @@ class Sistema():
                 print(e)
             else:
                 flag = True
-        cirujano = Cirujano(Especialidad[especialidad])
+        nombre = str(input("Ingrese el nombre del cirujano: "))
+        cirujano = Cirujano(Especialidad[especialidad], nombre)
         centro_salud.lista_cirujanos.append(cirujano)
         print("El cirujano fue creado con éxito")
 
