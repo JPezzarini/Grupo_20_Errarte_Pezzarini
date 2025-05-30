@@ -251,6 +251,10 @@ class Sistema():
 
         Returns:
             None.
+        
+        throws:
+            - DniError: Se lanza cuando encuentra un DNI igual al que se cargó.
+            - ValueError: se lo utiliza varias veces para entradas con formato o valor inválido
         """
 
         nombre = str(input("Ingrese el nombre del paciente: "))
@@ -511,6 +515,9 @@ class Sistema():
 
         Returns:
             None
+
+        throws:
+            - EncontrarpacienteError: se lanza cuando no se encontró el dni del paciente solicitado.
         """
 
         try:
