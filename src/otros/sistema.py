@@ -280,6 +280,9 @@ class Sistema():
                 print("Formato de fecha inválido, ingréselo devuelta")
             else:
                 flag = True
+            if (fecha_nacimiento > datetime.today()):
+                print("Entrada inválida. Fecha imposible")
+                flag = False
 
         flag = False
         while flag == False:
@@ -339,10 +342,17 @@ class Sistema():
                     minutos = int(input("Ingrese los minutos (0-59): "))
                     dt_fallecimiento = dt_fallecimiento.replace(hour = hora, minute = minutos)
                     flag = True
+                if (dt_fallecimiento < fecha_nacimiento or dt_fallecimiento > datetime.today()):
+                    print("Entrada inválida. Fecha imposible")
+                    flag = False
+
             flag = False
     
             lista_organos = []
             cantidad_organos = int(input("ingrese la cantidad de organos: "))
+            while cantidad_organos <= 0:
+                print("Entrada inválida. Cantidad de órganos imposible")
+                cantidad_organos = int(input("ingrese la cantidad de organos: "))
             for i in range (0,cantidad_organos):
                 flag = False
                 while flag == False:
@@ -379,7 +389,11 @@ class Sistema():
                     print("Formato de fecha inválido, ingréselo devuelta")
                 else:
                     flag = True
+                if (dt_espera < fecha_nacimiento or dt_espera > datetime.today()):
+                    print("Entrada inválida. Fecha imposible")
+                    flag = False
             flag = False
+
             patologia = str(input("ingrese su patologia: "))
             while flag == False:
                 try:
