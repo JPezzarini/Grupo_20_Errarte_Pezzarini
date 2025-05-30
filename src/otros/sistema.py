@@ -332,15 +332,12 @@ class Sistema():
         if (tipo_paciente == "D"):
             flag = False
             while flag == False:
-                str_fallecimiento = str(input("Ingrese la fecha de fallecimiento  AAAA-MM-DD: "))
+                str_fallecimiento = str(input("Ingrese la fecha, hora y minuto de fallecimiento  AAAA-MM-DD-HH-Min: "))
                 try:
-                    dt_fallecimiento = datetime.strptime(str_fallecimiento,"%Y-%m-%d")
+                    dt_fallecimiento = datetime.strptime(str_fallecimiento,"%Y-%m-%d-%H-%M")
                 except ValueError:
                     print("Formato de fecha inválido, ingréselo devuelta")
                 else:
-                    hora = int(input("Ingrese la hora (0-23): "))
-                    minutos = int(input("Ingrese los minutos (0-59): "))
-                    dt_fallecimiento = dt_fallecimiento.replace(hour = hora, minute = minutos)
                     flag = True
                 if (dt_fallecimiento < fecha_nacimiento or dt_fallecimiento > datetime.today()):
                     print("Entrada inválida. Fecha imposible")
