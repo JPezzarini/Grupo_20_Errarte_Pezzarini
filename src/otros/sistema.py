@@ -197,6 +197,9 @@ class Sistema():
 
         Returns:
             None.
+        
+        throws: 
+            - DisponibilidadError: se lanza cuando no hay cirujanos disponibles en un centro médico.
         """
 
         i = 0
