@@ -12,21 +12,23 @@ from personas.cirujano import *
 from otros.organo import *
 import csv
 import random
+
+#Inicialización de vehículos para los centros de salud
 vehiculos1 = [Avion(90), Helicoptero(100), Ambulancia(110), Ambulancia(85), Ambulancia(95)]
 vehiculos2 = [Avion(80), Avion(120), Helicoptero(100), Ambulancia(105), Ambulancia(90)]
 vehiculos3 = [Avion(80), Ambulancia(80), Ambulancia(60)]
-#Cirujanos
+#Creación de cirujanos con su especialidad
 gomez = Cirujano(Especialidad(5))
 fischer = Cirujano(Especialidad(1))
 fernandez = Cirujano(Especialidad(2))
 lopez = Cirujano(Especialidad(3))
 errarte = Cirujano(Especialidad(4))
 pezzarini = Cirujano(Especialidad(0))
-# Centros de Salud
+# Creación de Centros de Salud
 cs1 = Centro_Salud("Hospital Central", "La Plata", "Buenos Aires", "+54 911 1234-5678",[gomez, fischer], vehiculos1)
 cs2 = Centro_Salud("Clínica del Sur", "Avellaneda", "Buenos Aires", "+54 911 8765-4321", [fernandez, lopez], vehiculos2)
 cs3 = Centro_Salud("Hospital Heras", "Concordia", "Entre Ríos", "+54 345 421 2994", [errarte, pezzarini], vehiculos3)
-# Donantes (10 por centro)
+# Creación de Donantes
 donantes = [
     Donante("Matías", 47391714, datetime(1990, 5, 12), "M", "+54 911 1111-1111", "A+", cs1, datetime(2025, 4, 20, 23, 59), [Organo(Tipo(1)), Organo(Tipo(7))]),
     Donante("Lucía", 40123567, datetime(1985, 8, 24), "F", "+54 911 2222-2222", "B-", cs1, datetime(2025, 3, 15, 14, 30), [ Organo(Tipo(8))]),
@@ -40,7 +42,7 @@ donantes = [
     Donante("Julieta", 41234567, datetime(1994, 11, 18), "F", "+54 911 0000-0000", "O+", cs3, datetime(2025, 4, 7, 13, 15), [Organo(Tipo(8)), Organo(Tipo(1))]),
 ]
 
-# Receptores (10 por centro)
+# Creación de Receptores
 receptores = [
     Receptor("Ana", 41321789, datetime(1989, 6, 10), "F", "+54 911 1231-4567", "A+", cs1, Organo(Tipo(1)), datetime(2024, 5, 8), "Insuficiencia cardíaca", "Inestable"),
     Receptor("Diego", 40111222, datetime(1975, 3, 22), "M", "+54 911 2342-5678", "B-", cs1, Organo(Tipo(7)), datetime(2023, 12, 10), "Insuficiencia renal", "Estable"),
@@ -53,10 +55,15 @@ receptores = [
     Receptor("Camila", 48889999, datetime(1993, 7, 1), "F", "+54 911 9019-2345", "A+", cs3, Organo(Tipo(2)), datetime(2024, 4, 10), "Fibrosis quística", "Estable"),
     Receptor("Marcos", 49990000, datetime(1991, 12, 3), "M", "+54 911 0120-3456", "O-", cs2, Organo(Tipo(9)), datetime(2023, 8, 30), "Diabetes", "Estable"),
 ]
-
+#Inicialización de Incucai
 Incucai = Sistema([cs1,cs2, cs3],receptores, donantes)
 
+
 def mostrar_menu():
+    """
+    Muestra el menú de opciones disponibles para el usuario.
+    """
+
     print("1. Crear un paciente")
     print("2. Crear un cirujano")
     print("3. Imprimir lista de donantes")
@@ -65,7 +72,13 @@ def mostrar_menu():
     print("6. Imprimir donantes de un centro de salud específico")
     print("7. Informar prioridad de un receptor")
     print("8. Salir")
+
+
 def opcion_1():
+    """
+    Permite al usuario crear un nuevo paciente en el sistema y desencadena todo el proceso de búsqueda de matches.
+    """
+
     flag = False
     while flag == False:
         try:
@@ -82,7 +95,12 @@ def opcion_1():
         else:
             flag = True
 
+
 def opcion_2():
+    """
+    Permite al usuario crear un nuevo cirujano en el sistema.
+    """
+
     flag = False
     while flag == False:
         try:
@@ -99,13 +117,28 @@ def opcion_2():
         else:
             flag = True
 
+
 def opcion_3():
+    """
+    Imprime la lista de donantes registrados en el sistema.
+    """
+
     Incucai.listar_donantes()
 
+
 def opcion_4():
+    """
+    Imprime la lista de receptores registrados en el sistema.
+    """
+
     Incucai.listar_receptores()
 
+
 def opcion_5():
+    """
+    Imprime los receptores de un centro de salud específico.
+    """
+
     flag = False
     while flag == False:
         try:
@@ -122,7 +155,12 @@ def opcion_5():
             Incucai.buscar_receptores_centro_salud(centro_de_salud)
             flag = True
 
+
 def opcion_6():
+    """
+    Imprime los donantes de un centro de salud específico.
+    """
+
     flag = False
     while flag == False:
         try:
@@ -138,7 +176,13 @@ def opcion_6():
         else:
             Incucai.buscar_donantes_centro_salud(centro_de_salud)
             flag = True
+
+
 def opcion_7():
+    """
+    Informa la prioridad de un receptor según su DNI.
+    """
+
     flag = False
     while flag == False:
         try:
@@ -154,7 +198,13 @@ def opcion_7():
         else:
             Incucai.informar_prioridad_receptor(dni)
             flag = True
+
+
 def main():
+    """
+    Función principal que ejecuta el menú y gestiona las opciones seleccionadas por el usuario.
+    """
+
     while True:
         mostrar_menu()
         seleccion = input("Ingrese una opción: ")
@@ -177,5 +227,7 @@ def main():
             break
         else:
             print("Opción inválida. Ingrese un número permitido.")
+
+            
 if __name__ == "__main__":
     main()
