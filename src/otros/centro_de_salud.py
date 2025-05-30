@@ -59,7 +59,7 @@ class Centro_Salud:
             for i in range (len(self.lista_vehiculos)):
                 if isinstance(self.lista_vehiculos[i], Helicoptero):
                     if (self.lista_vehiculos[i].estado):
-                        distancia = randint(25,100) #en km
+                        distancia = randint(25,100)
                         nivel_trafico = 0
                         self.lista_vehiculos[i].realizar_transporte(distancia, nivel_trafico, fecha_ablacion_donante, viaje)
                         return True
@@ -67,7 +67,7 @@ class Centro_Salud:
             for i in range (len(self.lista_vehiculos)):
                 if isinstance(self.lista_vehiculos[i], Avion):
                     if (self.lista_vehiculos[i].estado):
-                        distancia = randint(100,3000) #en km
+                        distancia = randint(100,3000) 
                         nivel_trafico = 0
                         self.lista_vehiculos[i].realizar_transporte(distancia, nivel_trafico, fecha_ablacion_donante, viaje)
                         return True
@@ -146,7 +146,7 @@ class Centro_Salud:
                 if (self.lista_cirujanos[i] == organo and self.lista_cirujanos[i].estado == True):
                     self.lista_cirujanos[i].fecha_ultima_operacion = fecha_transplante
                     self.lista_cirujanos[i].estado = False
-                    return self.realizar_transplante(self.lista_cirujanos[i], receptor, organo) #si encuentra un cirujano que coincida y esté disponible sale de la función
+                    return self.realizar_transplante(self.lista_cirujanos[i], receptor, organo)
                     
         #Si no encuentra un especialista disponible, asigna al primer cirujano disponible, no importa especialidad        
         for i in range (len(self.lista_cirujanos)):
