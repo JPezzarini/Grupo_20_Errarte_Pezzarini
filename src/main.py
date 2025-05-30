@@ -55,6 +55,7 @@ receptores = [
 ]
 
 Incucai = Sistema([cs1,cs2, cs3],receptores, donantes)
+
 def mostrar_menu():
     print("1. Crear un paciente")
     print("2. Crear un cirujano")
