@@ -530,7 +530,7 @@ class Sistema():
 
         try:
             cont = 0
-            for i in range(len(self.lista_receptores)):
+            for i in range(self.lista_receptores.__len__()):
                 if (self.lista_receptores[i].get_dni() == dni_receptor):
                     print(f"En la escala de prioridad, el paciente se encuentra en el nivel {self.lista_receptores[i].prioridad}")
                     return

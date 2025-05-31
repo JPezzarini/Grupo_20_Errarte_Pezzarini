@@ -10,7 +10,6 @@ from vehiculos.avion import Avion
 from vehiculos.helicoptero import Helicoptero
 from personas.cirujano import *
 from otros.organo import *
-import csv
 import random
 
 #Inicialización de vehículos para los centros de salud
