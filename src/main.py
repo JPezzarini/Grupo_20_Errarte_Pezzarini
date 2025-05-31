@@ -77,6 +77,9 @@ def mostrar_menu():
 def opcion_1():
     """
     Permite al usuario crear un nuevo paciente en el sistema y desencadena todo el proceso de búsqueda de matches.
+
+    throws:
+        - ValueError: se lanza si no encuentra el centro de salud.
     """
 
     flag = False
@@ -99,6 +102,9 @@ def opcion_1():
 def opcion_2():
     """
     Permite al usuario crear un nuevo cirujano en el sistema.
+
+    throws: 
+        - ValueError: se lanza si no encuentra el centro de salud.
     """
 
     flag = False
@@ -137,6 +143,9 @@ def opcion_4():
 def opcion_5():
     """
     Imprime los receptores de un centro de salud específico.
+
+    throws:
+        - ValueError: se lanza si no encuentra el centro de salud
     """
 
     flag = False
@@ -159,6 +168,9 @@ def opcion_5():
 def opcion_6():
     """
     Imprime los donantes de un centro de salud específico.
+
+    throws:
+        - ValueError: se lanza si no encuentra el centro de salud.
     """
 
     flag = False
@@ -181,6 +193,9 @@ def opcion_6():
 def opcion_7():
     """
     Informa la prioridad de un receptor según su DNI.
+
+    throws:
+        - ValueError: se lanza si no se encontró el DNI
     """
 
     flag = False
