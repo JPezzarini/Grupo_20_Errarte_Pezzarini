@@ -32,7 +32,7 @@ class Ambulancia(Vehiculo):
         returns:
             Un objeto datetime que representa la suma de la fecha de ablación del órgano y el tiempo de transporte.
         """
-        tiempo = nivel_trafico + (distancia.__floordiv__(self.velocidad))
+        tiempo = nivel_trafico + (distancia.__truediv__(self.velocidad))
         tiempo_final = fecha_ablacion_donante + timedelta(hours = tiempo)
         self.registro_viajes.append(viaje)
         if datetime.today() < tiempo_final:
