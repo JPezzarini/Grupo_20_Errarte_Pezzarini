@@ -167,6 +167,7 @@ class Sistema():
             fecha_ablacion = donante.lista_organos[k].dt_ablacion #guarda la fecha en una variable para pasarla entre funciones
             viaje = f"{donante.centro_salud.nombre}-{receptor_match.centro_salud.nombre}" #guarda el viaje para pasarselo al vehiculo
             if(receptor_match.centro_salud == donante.centro_salud):
+                print("No es necesario realizar un viaje, ambos pacientes pertenecen al mismo centro de salud")
                 if (receptor_match.centro_salud.asignar_cirujano(receptor_match, donante.lista_organos[k])):
                     self.lista_receptores.remove(receptor_match)
                     donante.lista_organos.remove(organo)
@@ -222,6 +223,7 @@ class Sistema():
                         fecha_ablacion = self.lista_donantes[i].lista_organos[k].dt_ablacion #guardo la fecha en una variable para pasarla entre funciones
                         viaje = f"{self.lista_donantes[i].centro_salud.nombre}-{receptor.centro_salud.nombre}" #me guardo el viaje para pasarselo al vehiculo 
                         if(self.lista_donantes[i].centro_salud == receptor.centro_salud):
+                            print("No es necesario realizar un viaje, ambos pacientes pertenecen al mismo centro de salud")
                             if (receptor.centro_salud.asignar_cirujano(receptor, self.lista_donantes[i].lista_organos[k])):
                                 self.lista_receptores.remove(receptor)
                             else:
